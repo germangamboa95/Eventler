@@ -19,7 +19,7 @@ const verify = async (token) => {
     const payload = ticket.getPayload();
     const userid = payload['sub'];
 
-    return { payload, userid };
+    return { payload, userid, ticket };
 
   } catch (error) {
 

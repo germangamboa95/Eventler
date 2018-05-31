@@ -1,15 +1,29 @@
-const db = require('../models');
-const googleSignUp = require('../scripts/handleGoogleToken')
+const db = require("../models");
+const handleTokenGooge = require("../scripts/handleGoogleToken");
 
-module.exports = {
-    main: async (req, res) => {
-        console.log(db.Password.create({
-            id_user: 1,
-            password: 'germaniscool'
-        }))
+module.exports =  async (req, res) => {
 
-        let foo = await googleSignUp();
+    const type = req.params.type; 
 
-        res.send(foo)
+    const token = req.body.token;
+    const userDataRaw = await handleTokenGooge(token);
+
+    const userGoogId = userDataRaw.userid;
+    const userCleanedData = userDataRaw.payload;
+
+    try {
+        const dbData = await db.User.create({
+            google_id: userGoogId,
+            first_name:userCleanedData.given_name, 
+            last_name: userCleanedData.family_name,
+            img_url: userCleanedData.picture,
+            email: userCleanedData.email,
+            type: "tester"
+        }); 
+
+        res.json(dbData);
+
+    } catch (error) {
+        res.send(error);
     }
-}
+  }

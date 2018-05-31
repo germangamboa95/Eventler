@@ -1,11 +1,21 @@
 const db = require('../models');
+const jwt = require('jsonwebtoken')
+const handleTokenGooge = require("../scripts/handleGoogleToken");
 
-module.exports = {
-    main: (req, res) => {
-        console.log(db.Password.create({
-            id_user: 1,
-            password: 'germaniscool'
-        }))
-        res.send('Hello from login js')
+module.exports = async (req, res) => {
+        const token = req.body.token;
+
+        const userDataRaw = await handleTokenGooge(token);
+        const userGoogId = userDataRaw.userid;
+
+        const user = await db.User.find({google_id: userGoogId });
+
+        const payload = {id: user.google_id}; 
+
+        const tokenSigned = jwt.sign(payload, process.env.SECRET_OR_KEY);
+       
+        res.json({
+            token: tokenSigned,
+            user: user[0]._id
+        });
     }
-}
