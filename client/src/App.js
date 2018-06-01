@@ -25,7 +25,7 @@ class App extends Component {
         let x = await userService.test(
           e.getAuthResponse().id_token,
           "owner"
-        );
+        ); 
         console.log(e.getAuthResponse().id_token);
         console.log(x);
         

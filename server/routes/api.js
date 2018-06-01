@@ -27,7 +27,7 @@ router.get('/user/attended/event')
 router.get('/user/attended/events')
 
 // Sign up for event 
-router.post('/user/attend/event')
+router.post('/user/attend/event', controllers.events.attendEvent)
 
 
 module.exports = router;

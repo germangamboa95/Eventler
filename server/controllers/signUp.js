@@ -6,10 +6,13 @@ module.exports =  async (req, res) => {
     const type = req.params.type; 
 
     const token = req.body.token;
+
     const userDataRaw = await handleTokenGooge(token);
 
     const userGoogId = userDataRaw.userid;
     const userCleanedData = userDataRaw.payload;
+
+    console.log(userGoogId)
 
     try {
         const dbData = await db.User.create({
