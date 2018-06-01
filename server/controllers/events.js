@@ -113,16 +113,45 @@ module.exports = {
         "events_owned"
       ]);
 
-
       //    If no user found throw error saying no user found!
-      if(dbData.length === 0) throw new Error("User not found!");
+      if (dbData.length === 0) throw new Error("User not found!");
 
       res.json(dbData);
     } catch (error) {
-        console.log(error)
-        res.json({
-            msg: error.message
-          });
+      res.json({
+        msg: error.message
+      });
+    }
+  },
+  getEventData: async (req, res) => {
+    const eventId = req.params.id;
+    try {
+      const dbData = await db.Event.findOne({ _id: eventId }).populate([
+        "event_owners",
+        "event_signed_up",
+        "event_attendees_approved"
+      ]);
+      res.json(dbData);
+    } catch (error) {
+      res.json({ msg: error.message });
+    }
+  },
+  updateEvent: async (req, res) => {
+    const field = req.body.field;
+    const value = req.body.value;
+    const eventId = req.body.event_id;
+
+    try {
+      if(field === "_id") throw new Error('Cannot change _id!')
+      const dbData = await db.Event.findByIdAndUpdate(
+        { _id: eventId },
+        { [field]: value },
+        { new: true }
+      );
+      res.json(dbData);
+
+    } catch (error) {
+      res.json({ msg: error.message });
     }
   }
 };
