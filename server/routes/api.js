@@ -10,17 +10,18 @@ router.post("/login", controllers.login);
 // Routes to Events
 
 //  Get Events Data Managed 
-router.get('/user/managed/events')
+router.get('/user/managed/events/get/:id', controllers.events.getOwnedEvents)
 router.get('/user/managed/event')
 
 // Approve Attendee toggle 
-router.post('/user/managed/events/:id')
+router.post('/user/managed/events/approve', controllers.events.approveAttend)
+router.post('/user/managed/events/revoke', controllers.events.revokeAttend)
 
 // Create Events 
 router.post('/user/managed/create/event', controllers.events.createEvent)
 
 // Update an event
-router.put('/user/managed/event')
+router.post('/user/managed/event')
 
 // Get Events Data attendee 
 router.get('/user/attended/event')

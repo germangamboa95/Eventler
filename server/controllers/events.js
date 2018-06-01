@@ -30,7 +30,7 @@ module.exports = {
         event_signed_up: { $in: [userId] }
       });
 
-      if (checkForExistingUser.lexngth == 0) {
+      if (checkForExistingUser.length == 0) {
         const dbData = await db.Event.findOneAndUpdate(
           { _id: eventId },
           { $push: { event_signed_up: userId } },
@@ -44,6 +44,85 @@ module.exports = {
       }
     } catch (error) {
       res.json(error);
+    }
+  },
+  approveAttend: async (req, res) => {
+    const eventId = req.body.event_id;
+    const userId = req.body.user_id;
+
+    try {
+      const checkForExistingUser = await db.Event.find({
+        _id: eventId,
+        event_attendees_approved: { $in: [userId] }
+      });
+
+      if (checkForExistingUser.length == 0) {
+        const dbData = await db.Event.findOneAndUpdate(
+          { _id: eventId },
+          {
+            $push: { event_attendees_approved: userId },
+            $pull: { event_signed_up: userId }
+          },
+          { new: true }
+        );
+
+        res.json(dbData);
+      } else {
+        res.json({
+          msg: "User already in approved queue"
+        });
+      }
+    } catch (error) {
+      res.json(error);
+    }
+  },
+  revokeAttend: async (req, res) => {
+    const eventId = req.body.event_id;
+    const userId = req.body.user_id;
+
+    try {
+      const checkForExistingUser = await db.Event.find({
+        _id: eventId,
+        event_attendees_approved: { $in: [userId] }
+      });
+
+      if (checkForExistingUser.length != 0) {
+        const dbData = await db.Event.findOneAndUpdate(
+          { _id: eventId },
+          {
+            $pull: { event_attendees_approved: userId },
+            $push: { event_signed_up: userId }
+          },
+          { new: true }
+        );
+
+        res.json(dbData);
+      } else {
+        res.json({
+          msg: "I cannot do that Dave."
+        });
+      }
+    } catch (error) {
+      res.json(error);
+    }
+  },
+  getOwnedEvents: async (req, res) => {
+    const userId = req.params.id;
+    try {
+      const dbData = await db.User.find({ _id: userId }).populate([
+        "events_owned"
+      ]);
+
+
+      //    If no user found throw error saying no user found!
+      if(dbData.length === 0) throw new Error("User not found!");
+
+      res.json(dbData);
+    } catch (error) {
+        console.log(error)
+        res.json({
+            msg: error.message
+          });
     }
   }
 };
