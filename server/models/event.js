@@ -35,7 +35,11 @@ const Event = new Schema({
   event_attendees_approved:[{
       type: Schema.Types.ObjectId,
       ref: 'User'
-  }]
+  }],
+  event_attendees_completed:[{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+}]
 });
 
 module.exports = mongoose.model("Event", Event);

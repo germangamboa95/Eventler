@@ -30,5 +30,6 @@ router.get('/user/get/event/:id', controllers.events.getEventData)
 // Sign up for event 
 router.post('/user/attend/event', controllers.events.attendEvent)
 
-
+//  Event completed sort all attendees for analysis
+router.post('/user/event/done', controllers.events.eventCompleted)
 module.exports = router;

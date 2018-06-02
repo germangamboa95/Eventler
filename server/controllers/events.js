@@ -36,6 +36,13 @@ module.exports = {
           { $push: { event_signed_up: userId } },
           { new: true }
         );
+
+        const dbData2 = await db.User.findOneAndUpdate(
+          { _id: userId },
+          { $push: { events_signed_up: eventId } },
+          { new: true }
+        );
+
         res.json(dbData);
       } else {
         res.json({
@@ -66,6 +73,15 @@ module.exports = {
           { new: true }
         );
 
+        await db.User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $push: { events_approved: eventId },
+            $pull: { events_signed_up: eventId }
+          },
+          { new: true }
+        );
+
         res.json(dbData);
       } else {
         res.json({
@@ -92,6 +108,15 @@ module.exports = {
           {
             $pull: { event_attendees_approved: userId },
             $push: { event_signed_up: userId }
+          },
+          { new: true }
+        );
+
+        await db.User.findOneAndUpdate(
+          { _id: userId },
+          {
+            $pull: { events_approved: eventId },
+            $push: { events_signed_up: eventId }
           },
           { new: true }
         );
@@ -142,16 +167,28 @@ module.exports = {
     const eventId = req.body.event_id;
 
     try {
-      if(field === "_id") throw new Error('Cannot change _id!')
+      if (field === "_id") throw new Error("Cannot change _id!");
+
       const dbData = await db.Event.findByIdAndUpdate(
         { _id: eventId },
         { [field]: value },
         { new: true }
       );
       res.json(dbData);
-
     } catch (error) {
       res.json({ msg: error.message });
     }
+  },
+  eventCompleted: async (req, res) => {
+    const eventId = req.body.event_id;
+    //  Get all the event and move everyone form approve to attended
+    try {
+        const dbData = await db.Event.findOne({ _id: eventId })
+        const updatedData = await db.Event.findByIdAndUpdate(eventId, {event_attendees_completed: dbData.event_attendees_approved}, {new : true})
+        res.json(updatedData)
+    } catch (error) {
+        res.json({msg: error.message})
+    }
+
   }
 };
