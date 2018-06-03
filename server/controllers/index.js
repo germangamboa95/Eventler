@@ -1,10 +1,7 @@
-const login = require('./login');
-const signUp = require('./signUp');
 const events = require('./events');
-
+const user = require('./user');
 
 module.exports = {
-    login: login,
-    signUp: signUp,
+    user: user,
     events: events
 }

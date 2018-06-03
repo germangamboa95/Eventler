@@ -1,7 +1,7 @@
-const Api = require('./api'); 
-const   Auth = require('./auth');
+const user = require('./user'); 
+const  event = require('./event');
 
 module.exports = {
-    Api: Api,
-    Auth: Auth
+    User: user,
+    Event: event
 }

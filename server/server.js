@@ -25,8 +25,8 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 
 // App routes
-app.use("/api", routes.Api);
-app.use("/auth", routes.Auth);
+app.use("/user", routes.User);
+app.use("/event", routes.Event);
 
 //  Error Catcher
 app.use(function(error, req, res, next) {
