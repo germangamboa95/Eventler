@@ -3,30 +3,35 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const User = new Schema({
-  google_id: {
+    provider: {
     type: String,
     required: true,
-    unique: true
+  },
+  id: {
+    type: String,
+    required: true,
+    default: null
   },
   first_name: {
     type: String,
-    required: true
+    default: null
   },
   last_name: {
     type: String,
-    required: true
+    default: null
   },
   img_url: {
     type: String,
     required: false
-  },
+  }, 
   email: {
     type: String,
-    required: true
+    default: null
   },
   type: {
     type: String,
-    required: true
+    required: true,
+    default: 'User'
   },
   events_signed_up: [
     {

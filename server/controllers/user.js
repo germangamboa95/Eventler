@@ -1,44 +1,42 @@
 const db = require("../models");
-const handleTokenGooge = require("../scripts/handleGoogleToken");
+const jwt = require('jsonwebtoken');
+
 
 module.exports = {
   signUp: async (req, res) => {
-    const type = req.params.type;
-    const token = req.body.token;
+    const provider = req.locals.provider; 
+    const user_id = req.locals.id;
+    const userData = req.locals._json;
+    
+    const dbData = await db.User.find({provider: provider, id: user_id});
 
-    const userDataRaw = await handleTokenGooge(token);
-    const userGoogId = userDataRaw.userid;
-    const userCleanedData = userDataRaw.payload;
+    if(dbData.length > 0) {
+        req.dbData = dbData;
+        req.sf = true;
+        module.exports.login(req, res);
+    }
 
     try {
       const dbData = await db.User.create({
-        google_id: userGoogId,
-        first_name: userCleanedData.given_name,
-        last_name: userCleanedData.family_name,
-        img_url: userCleanedData.picture,
-        email: userCleanedData.email,
-        type: "tester"
+       provider: provider,
+       id: user_id,
+       first_name: userData.name.givenName,
+       last_name: userData.name.familyName,
+       email: (userData.emails)? userData.emails[0].value : null,
+       img_url:(userData.image)? userData.image['url'] : null
       });
-      res.json(dbData);
+
+      req.dbData = dbData;
+      req.sf = false;
+      module.exports.login(req, res);
     } catch (error) {
       res.send(error);
     }
+
   },
   login: async (req, res) => {
-    const token = req.body.token;
-
-    const userDataRaw = await handleTokenGooge(token);
-    const userGoogId = userDataRaw.userid;
-
-    const user = await db.User.find({ google_id: userGoogId });
-
-    const payload = { id: user.google_id };
-
+    const payload = { id: req.dbData[0].id};
     const tokenSigned = jwt.sign(payload, process.env.SECRET_OR_KEY);
-
-    res.json({
-      token: tokenSigned,
-      user: user[0]._id
-    });
+    res.redirect(`http://localhost:3001?token=${tokenSigned}&done=${req.sf}&ui=${req.dbData[0]._id}`);
   }
 };

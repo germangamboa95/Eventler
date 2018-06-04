@@ -25,6 +25,7 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 
 // App routes
+app.use('/auth', routes.Auth);
 app.use("/user", routes.User);
 app.use("/event", routes.Event);
 

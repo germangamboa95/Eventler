@@ -2,8 +2,6 @@ const router = require("express").Router();
 const controllers = require("../controllers");
 const passport = require('../scripts/passportConfig');
 
-
-
 // Routes to Events
 
 //  Get Events Data Managed 
