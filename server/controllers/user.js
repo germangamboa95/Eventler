@@ -44,9 +44,10 @@ module.exports = {
     res.redirect(`http://localhost:3001?token=${tokenSigned}&done=${req.sf}&ui=${req.dbData._id}`);
   },
   finishSignUp: async (req, res) => {
-    const user_id = req.body.id; 
-    const updates = req.body.updates; 
-    const dbData = await db.User.findByIdAndUpdate({_id: user_id},{updates}, {new: true}); 
+    const user_id = req.params.id; 
+    const updates = req.body.data; 
+    console.log(updates)
+    const dbData = await db.User.findByIdAndUpdate(user_id, updates, {new: true}); 
     res.json(dbData);
   },
   getUser: async (req, res) => {

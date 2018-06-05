@@ -4,14 +4,17 @@ import Home from "./pages/home";
 import Dashboard from "./pages/dashboard";
 import Navbar from "./components/navbar";
 import NotFound from "./pages/404";
-
+import ls from "./services/localStorage";
 import { Container } from "reactstrap";
+import { withRouter } from "react-router-dom";
+
 class App extends Component {
   state = {
-    loggedIn: false,
+    loggedIn: ls.useToken() ? true : false,
     userData: {}
   };
 
+  //  Functions that allow app wide state update. Use carefully!
   updateUserData = obj => this.setState({ userData: obj });
 
   updateLoginState = state => this.setState({ loggedIn: state });
@@ -25,8 +28,18 @@ class App extends Component {
             updateLoginState={this.updateLoginState}
             updateUserData={this.updateUserData}
           />
-          <Container>
             <Switch>
+              <Route
+                path="/dashboard"
+                render={routeProps => (
+                  <Dashboard
+                    {...routeProps}
+                    {...this.state}
+                    updateLoginState={this.updateLoginState}
+                    updateUserData={this.updateUserData}
+                  />
+                )}
+              />
               <Route
                 exact
                 path="/"
@@ -39,21 +52,8 @@ class App extends Component {
                   />
                 )}
               />
-              <Route
-                exact
-                path="/dashboard"
-                render={routeProps => (
-                  <Dashboard
-                    {...routeProps}
-                    {...this.state}
-                    updateLoginState={this.updateLoginState}
-                    updateUserData={this.updateUserData}
-                  />
-                )}
-              />
               <Route component={NotFound} />
             </Switch>
-          </Container>
         </div>
       </Router>
     );

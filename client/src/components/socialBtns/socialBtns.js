@@ -6,7 +6,7 @@ import {
   CardBody
 } from "reactstrap";
 
-const Example = props => {
+const socialLogin = props => {
   return (
     <Card className="col-sm-12 col-md-5 mt-5">
       <CardBody className="text-center d-flex flex-column justify-content-around">
@@ -32,4 +32,4 @@ const Example = props => {
   );
 };
 
-export default Example;
+export default socialLogin;

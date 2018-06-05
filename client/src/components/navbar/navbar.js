@@ -28,6 +28,7 @@ class Navbars extends React.Component {
 
   logOut = () => {
     ls.clear();
+    this.props.updateUserData({});
     this.props.updateLoginState(false);
     this.props.history.push("/");
   };
@@ -40,7 +41,9 @@ class Navbars extends React.Component {
             <Link className="nav-item nav-link" to="/dashboard">
               Dashboard
             </Link>
-
+            <Link className="nav-item nav-link" to='/dashboard/create'>
+              Create Event
+            </Link>
             <NavLink className="nav-item nav-link" onClick={this.logOut}>
               LogOut
             </NavLink>
