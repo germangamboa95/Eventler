@@ -33,6 +33,10 @@ const User = new Schema({
     required: true,
     default: 'User'
   },
+  cell: {
+    type: String,
+    default: null
+  },
   events_signed_up: [
     {
       type: Schema.Types.ObjectId,

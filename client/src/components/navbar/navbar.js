@@ -1,19 +1,17 @@
-
-import React from 'react';
+import React from "react";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  NavLink
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import ls from "../../services/localStorage";
 
-export default class Navbars extends React.Component {
+class Navbars extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,41 +25,55 @@ export default class Navbars extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  logOut = () => {
+    ls.clear();
+    this.props.updateLoginState(false);
+    this.props.history.push("/");
+  };
+
   render() {
+    const loggedIn = () => {
+      if (this.props.loggedIn) {
+        return (
+          <Nav className="ml-auto" navbar>
+            <Link className="nav-item nav-link" to="/dashboard">
+              Dashboard
+            </Link>
+
+            <NavLink className="nav-item nav-link" onClick={this.logOut}>
+              LogOut
+            </NavLink>
+          </Nav>
+        );
+      } else {
+        return (
+          <Nav className="ml-auto" navbar>
+            <Link className="nav-item nav-link" to="/">
+              Login
+            </Link>
+
+            <Link className="nav-item nav-link" to="/">
+            Sign Up
+            </Link>
+          </Nav>
+        );
+      }
+    };
+
     return (
       <div>
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/">Evently</NavbarBrand>
+          <Link className="navbar-brand" to={(this.props.loggedIn)?'/dashboard':'/'}>Evently</Link>
+
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    Option 1
-                  </DropdownItem>
-                  <DropdownItem>
-                    Option 2
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Reset
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
+            {loggedIn()}
           </Collapse>
         </Navbar>
       </div>
     );
   }
 }
+
+export default withRouter(Navbars);

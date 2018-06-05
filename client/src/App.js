@@ -1,25 +1,61 @@
 import React, { Component } from "react";
-import { Button } from "reactstrap";
-import Navbars from "./components/navbar/navbar";
-import WelcomeCard from "./components/welcomeCard/card";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./pages/home";
+import Dashboard from "./pages/dashboard";
+import Navbar from "./components/navbar";
+import NotFound from "./pages/404";
 
-
-import userService from "./services/userServices";
-
+import { Container } from "reactstrap";
 class App extends Component {
+  state = {
+    loggedIn: false,
+    userData: {}
+  };
 
+  updateUserData = obj => this.setState({ userData: obj });
+
+  updateLoginState = state => this.setState({ loggedIn: state });
 
   render() {
     return (
-      <div>
-        <Navbars />
-        <div className="container">
-          <WelcomeCard />
-          <a href="https://www.facebook.com/"> German</a>
-          <a href="http://localhost:3000/auth/google">Sign In with Google</a>
-          <a href="http://localhost:3000/auth/facebook">Login with Facebook</a>
+      <Router>
+        <div>
+          <Navbar
+            {...this.state}
+            updateLoginState={this.updateLoginState}
+            updateUserData={this.updateUserData}
+          />
+          <Container>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={routeProps => (
+                  <Home
+                    {...routeProps}
+                    {...this.state}
+                    updateLoginState={this.updateLoginState}
+                    updateUserData={this.updateUserData}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/dashboard"
+                render={routeProps => (
+                  <Dashboard
+                    {...routeProps}
+                    {...this.state}
+                    updateLoginState={this.updateLoginState}
+                    updateUserData={this.updateUserData}
+                  />
+                )}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </Container>
         </div>
-      </div>
+      </Router>
     );
   }
 }

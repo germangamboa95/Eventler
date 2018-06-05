@@ -4,8 +4,8 @@ const passport = require('../scripts/passportConfig');
 
 
 //  Routes regarding sign ups and logins
-router.post("/signUp", controllers.user.signUp);
-router.post("/login", controllers.user.login);
+router.post("/finishSignUp", controllers.user.finishSignUp);
+router.get('/user/:_id', controllers.user.getUser);
 
 
 
