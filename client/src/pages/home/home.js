@@ -1,12 +1,29 @@
 import React, { Component } from "react";
 import OauthBtns from "../../components/socialBtns";
-import { Container, Row, Jumbotron, Button } from "reactstrap";
+import { Container, Row, Jumbotron } from "reactstrap";
 import utils from "../../services/utils";
 import ls from "../../services/localStorage";
-import {Link, Route} from 'react-router-dom';
-
+import { Link, Route } from "react-router-dom";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 class Home extends Component {
+  state = {
+    modal: false
+  };
+
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
+
+  componentDidUpdate() {
+    // Reading route hash to check if modal should open.
+    if(this.props.location.hash) {
+      this.toggle()
+      this.props.location.hash = '';
+    }
+  }
   componentDidMount() {
     if (this.props.loggedIn) {
       this.props.history.push("/dashboard");
@@ -21,35 +38,35 @@ class Home extends Component {
     }
   }
 
-
   render() {
     return (
       <div>
-      <Jumbotron fluid className="text-center col-12" style={JumbotronStyles}>
-      <h2>Evently</h2>
-      <p>The best event management app.</p>
-      <Button>Get Started</Button>
-    </Jumbotron>
-      <Container> 
-        <Row className="d-flex justify-content-around">
-        <OauthBtns msg="Sign Up" />
-          <OauthBtns msg="Log In" />
-        </Row>
-
-      </Container>
+        <Jumbotron fluid className="text-center" style={JumbotronStyles}>
+          <h2>Evently</h2>
+          <p>The best event management app.</p>
+          <Button>Get Started</Button>
+          <Container>
+          <Row className="d-flex justify-content-around">
+            <OauthBtns msg="Sign Up" />
+          </Row>
+        </Container>
+        </Jumbotron>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
+          <ModalBody>
+            <OauthBtns msg="Log In" />
+          </ModalBody>
+        </Modal>
       </div>
     );
   }
 }
 
 const JumbotronStyles = {
-  backgroundImage: "url('https://images.pexels.com/photos/273011/pexels-photo-273011.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
-  backgroundPosition: 'center',
-  backgroundSize: 'cover',
-  filter: 'brightness(90%)',
-  color: '#ffffff'
-}
-
-
+  
+};
 
 export default Home;

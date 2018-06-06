@@ -29,8 +29,7 @@ const Event = new Schema({
   }],
   event_signed_up:[{
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    unique: true
+    ref: 'User'
   }],
   event_attendees_approved:[{
       type: Schema.Types.ObjectId,

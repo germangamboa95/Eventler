@@ -9,5 +9,8 @@ export default {
     },
     loadOwnedEvents: (id) => {
         return Api().get(`event/managed/events/get/${id}`)
+    },
+    createNewEvent: (id, data) => {
+        return Api().post('event/managed/create/event', data)
     }
 }

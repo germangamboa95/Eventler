@@ -19,7 +19,10 @@ class Dashboard extends Component {
   }
 
   componentDidUpdate() {
-
+    if(this.props.location.hash === '#update') {
+      this.loadUserData();
+      this.props.history.push("/dashboard");
+    }
   }
 
   loadUserData = async () => {
@@ -73,7 +76,7 @@ class Dashboard extends Component {
       <Container>
         {isComplete()}
         <Switch>
-        <Route  path={this.props.match.url+'/create'} render={routeProps => (<CreateEvent {...routeProps}/>)}/>
+        <Route  path={this.props.match.url+'/create'} render={routeProps => (<CreateEvent {...routeProps} {...this.state}/>)}/>
         <Route  path={this.props.match.url+'/'} render={routeProps => (<DashboardContainer {...routeProps} {...this.state}/>)}/>
         </Switch>
       </Container>

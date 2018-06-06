@@ -52,13 +52,13 @@ class Navbars extends React.Component {
       } else {
         return (
           <Nav className="ml-auto" navbar>
-            <Link className="nav-item nav-link" to="/">
+            <Link className="nav-item nav-link" to="/#modal">
               Login
             </Link>
 
-            <Link className="nav-item nav-link" to="/">
-            Sign Up
-            </Link>
+            <a className="nav-item nav-link" href="http://germangamboa.com">
+            About Creator
+            </a>
           </Nav>
         );
       }

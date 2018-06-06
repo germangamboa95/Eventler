@@ -25,4 +25,5 @@ const sendTexts = async (numbersArr, msg) => {
 };
 
 // TODO:  Need to add function to keep track of messages sent later on!
+
 module.exports = sendTexts;
