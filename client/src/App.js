@@ -5,8 +5,6 @@ import Dashboard from "./pages/dashboard";
 import Navbar from "./components/navbar";
 import NotFound from "./pages/404";
 import ls from "./services/localStorage";
-import { Container } from "reactstrap";
-import { withRouter } from "react-router-dom";
 import EventSignUp from "./pages/eventSignUp";
 class App extends Component {
   state = {

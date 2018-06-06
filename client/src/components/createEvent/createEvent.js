@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import DatePicker from "react-date-picker";
-import TimePicker from "react-time-picker";
 import fetch from "../../services/userServices";
 class CreateEvent extends Component {
   state = {
@@ -25,7 +24,7 @@ class CreateEvent extends Component {
       event_time: this.state.event_time,
       event_owners: this.props._id
     };
-    const response = await fetch.createNewEvent(this.props._id, eventData);
+    await fetch.createNewEvent(this.props._id, eventData);
     this.props.history.push("/dashboard/#update");
   };
 

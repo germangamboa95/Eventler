@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card } from "reactstrap";
+import { Container} from "reactstrap";
 import fetch from "../../services/userServices";
-import UserForm from "../../components/userInfoForm";
-import ls from "../../services/localStorage";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CreateEvent from "../../components/createEvent";
-import DashboardContainer from "../../components/dashBoardContainer";
 import SignUpForm from "../../components/userInfoForm";
 import EventDisplay from '../../components/EventInfoDisplay'
 class EventSignUp extends Component {
   state = {
     event_id: this.props.match.params.id,
-    first_name: "German",
+    first_name: "",
     last_name: "",
     email: "",
     cell: ""

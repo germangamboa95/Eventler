@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Table, CardTitle, Badge, Button } from "reactstrap";
+import { Card, Table, CardTitle, Badge} from "reactstrap";
 
 const MyEvents = (props) => {
-    if (props.events_owned != undefined) {
+    if (props.events_owned !== undefined) {
       return (
         <Card className="mt-5">
           <CardTitle className="text-center my-auto">Events Owned</CardTitle>

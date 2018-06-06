@@ -3,8 +3,8 @@ import OauthBtns from "../../components/socialBtns";
 import { Container, Row, Jumbotron } from "reactstrap";
 import utils from "../../services/utils";
 import ls from "../../services/localStorage";
-import { Link, Route } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
+import { Button, Modal,ModalBody} from "reactstrap";
 
 class Home extends Component {
   state = {

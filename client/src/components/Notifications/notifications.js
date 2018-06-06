@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Table, CardTitle, Badge, Button, CardBody, ListGroup, ListGroupItem } from "reactstrap";
+import { Card,CardTitle, CardBody, ListGroup, ListGroupItem } from "reactstrap";
 
 const Notifications = props => (
   <Card className="mt-5">
