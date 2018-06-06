@@ -49,6 +49,19 @@ class Navbars extends React.Component {
             </NavLink>
           </Nav>
         );
+      } else if(this.props.location.pathname === '/joinEvent'){
+      
+        return (
+          <Nav className="ml-auto" navbar>
+            <Link className="nav-item nav-link" to="/">
+              Home
+            </Link>
+
+            <a className="nav-item nav-link" href="http://germangamboa.com">
+            About Creator
+            </a>
+          </Nav>
+        );
       } else {
         return (
           <Nav className="ml-auto" navbar>

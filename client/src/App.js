@@ -7,7 +7,7 @@ import NotFound from "./pages/404";
 import ls from "./services/localStorage";
 import { Container } from "reactstrap";
 import { withRouter } from "react-router-dom";
-
+import EventSignUp from "./pages/eventSignUp";
 class App extends Component {
   state = {
     loggedIn: ls.useToken() ? true : false,
@@ -28,32 +28,43 @@ class App extends Component {
             updateLoginState={this.updateLoginState}
             updateUserData={this.updateUserData}
           />
-            <Switch>
-              <Route
-                path="/dashboard"
-                render={routeProps => (
-                  <Dashboard
-                    {...routeProps}
-                    {...this.state}
-                    updateLoginState={this.updateLoginState}
-                    updateUserData={this.updateUserData}
-                  />
-                )}
-              />
-              <Route
-                exact
-                path="/"
-                render={routeProps => (
-                  <Home
-                    {...routeProps}
-                    {...this.state}
-                    updateLoginState={this.updateLoginState}
-                    updateUserData={this.updateUserData}
-                  />
-                )}
-              />
-              <Route component={NotFound} />
-            </Switch>
+          <Switch>
+            <Route
+              path="/dashboard"
+              render={routeProps => (
+                <Dashboard
+                  {...routeProps}
+                  {...this.state}
+                  updateLoginState={this.updateLoginState}
+                  updateUserData={this.updateUserData}
+                />
+              )}
+            />
+            <Route
+              path="/joinEvent/:id"
+              render={(routeProps) => (
+                <EventSignUp
+                  {...routeProps}
+                  {...this.state}
+                  updateLoginState={this.updateLoginState}
+                  updateUserData={this.updateUserData}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/"
+              render={routeProps => (
+                <Home
+                  {...routeProps}
+                  {...this.state}
+                  updateLoginState={this.updateLoginState}
+                  updateUserData={this.updateUserData}
+                />
+              )}
+            />
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </Router>
     );
