@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Table, CardTitle, Badge} from "reactstrap";
 
 const MyEvents = (props) => {
+  console.log(props)
     if (props.events_owned !== undefined) {
       return (
         <Card className="mt-5">
@@ -28,7 +29,7 @@ const MyEvents = (props) => {
                   <td>{item.event_attendees_approved.length}</td>
                   <td>{item.event_signed_up.length - item.event_attendees_approved.length}</td>
         
-                  <td><Badge color="primary" className="btn btn-primary">Manage</Badge></td>
+                  <td><Badge color="primary" className="btn btn-primary" onClick={props.ManageEventReq.bind(this, item._id)}>Manage</Badge></td>
                 </tr>
               ))}
             </tbody>

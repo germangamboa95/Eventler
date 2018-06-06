@@ -2,8 +2,9 @@ import React from "react";
 import EventTable from "../eventTable/";
 import Notifications from '../Notifications';
 
+
 const DashContainer = props => {
-  console.log(props, "asdf");
+  console.log('asdfghjk')
   return (
     <div>
       <Notifications {...props}/>

@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { Container} from "reactstrap";
+import { Container } from "reactstrap";
 import fetch from "../../services/userServices";
 import SignUpForm from "../../components/userInfoForm";
-import EventDisplay from '../../components/EventInfoDisplay'
+import EventDisplay from "../../components/EventInfoDisplay";
+import ThankYou from "../../components/thankYou";
+
 class EventSignUp extends Component {
   state = {
     event_id: this.props.match.params.id,
     first_name: "",
     last_name: "",
     email: "",
-    cell: ""
+    cell: "",
+    done: false
   };
 
   async componentDidMount() {
@@ -32,24 +35,37 @@ class EventSignUp extends Component {
     event.preventDefault();
     event.persist();
     const dataToSend = {
-      [event.target[0].name] : event.target[0].value,
-      [event.target[1].name] : event.target[1].value,
-      [event.target[2].name] : event.target[2].value,
-      [event.target[3].name] : event.target[3].value
-    }
+      [event.target[0].name]: event.target[0].value,
+      [event.target[1].name]: event.target[1].value,
+      [event.target[2].name]: event.target[2].value,
+      [event.target[3].name]: event.target[3].value
+    };
     const test = await fetch.newUserForEvent(dataToSend);
     this.setState(test.data);
-    const eventMsg = await fetch.signUpForEvent(this.state.event_id, test.data._id);
-    console.log(eventMsg)
-  }
-
+    const eventMsg = await fetch.signUpForEvent(
+      this.state.event_id,
+      test.data._id
+    );
+    this.setState({ done: true})
+    console.log(eventMsg);
+  };
 
   render() {
     console.log(this.state);
     return (
       <Container>
-        <EventDisplay {...this.state}/>
-        <SignUpForm {...this.state}   inputChange={this.handleInputChange} handleSubmit={this.handleSubmit}/>
+        {!this.state.done ? (
+          <div>
+            <EventDisplay {...this.state} />
+            <SignUpForm
+              {...this.state}
+              inputChange={this.handleInputChange}
+              handleSubmit={this.handleSubmit}
+            />
+          </div>
+        ) : (
+          <ThankYou />
+        )}
       </Container>
     );
   }

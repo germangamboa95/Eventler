@@ -150,6 +150,7 @@ module.exports = {
   },
   getEventData: async (req, res) => {
     const eventId = req.params.id;
+    console.log(eventId);
     try {
       const dbData = await db.Event.findOne({ _id: eventId }).populate([
         "event_owners",
