@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use('/auth', routes.Auth);
 app.use("/user", routes.User);
 app.use("/event", routes.Event);
-
+app.use('/coms', routes.Coms);
 //  Error Catcher
 app.use(function(error, req, res, next) {
   console.log(error);

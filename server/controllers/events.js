@@ -71,7 +71,11 @@ module.exports = {
             $pull: { event_signed_up: userId }
           },
           { new: true }
-        );
+        ).populate([
+          "event_owners",
+          "event_signed_up",
+          "event_attendees_approved"
+        ]);
 
         await db.User.findOneAndUpdate(
           { _id: userId },
@@ -110,7 +114,11 @@ module.exports = {
             $push: { event_signed_up: userId }
           },
           { new: true }
-        );
+        ).populate([
+          "event_owners",
+          "event_signed_up",
+          "event_attendees_approved"
+        ]);
 
         await db.User.findOneAndUpdate(
           { _id: userId },

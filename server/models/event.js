@@ -22,6 +22,7 @@ const Event = new Schema({
   event_img: {
     type: String,
     required: false
+    
   },
   event_owners: [{
       type: Schema.Types.ObjectId,
