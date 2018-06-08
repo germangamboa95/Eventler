@@ -8,14 +8,15 @@ import CreateEvent from "../../components/createEvent";
 import DashboardContainer from "../../components/dashBoardContainer";
 import NotFound from "../404/404";
 import EventManager from "../../components/eventManager";
-
 class Dashboard extends Component {
   state = {
     token: ls.useToken(),
     complete: ls.getState(),
     _id: ls.useId()
+
   };
 
+  
   componentDidMount() {
     this.loadUserData();
   }

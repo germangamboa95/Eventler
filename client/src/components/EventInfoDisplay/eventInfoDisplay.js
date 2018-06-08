@@ -1,15 +1,28 @@
 import React from "react";
-import {Card } from "reactstrap";
+import {
+  Card,
+  CardImg,
+  CardBody,
+  CardText,
+  CardSubtitle,
+  CardTitle
+} from "reactstrap";
+import moment from "moment";
+
 const EventInfoDisplay = props => {
   return (
-    <Card>
-      <h2>{props.event_name}</h2>
-      <p>{props.event_location}</p>
-      <p>{props.event_date}</p>
-      <p>{props.event_time}</p>
-      <p>
-        {props.event_signed_up ? props.event_signed_up.length : 0}
-      </p>
+    <Card className="mt-4">
+      <CardImg top width="100%" src={props.event_img} alt="Card image cap" />
+      <CardBody className="text-center">
+        <CardTitle>{props.event_name}</CardTitle>
+        <CardSubtitle>Location:</CardSubtitle>
+        <CardText>{props.event_location}</CardText>
+        <CardSubtitle>Date &amp; Time:</CardSubtitle>
+        <CardText>{moment(props.event_date).format("MMMM Do YYYY, h:mm a")}</CardText>
+        <CardSubtitle>Number Attending:</CardSubtitle>
+        <CardText>{props.event_signed_up ? props.event_signed_up.length : 0}</CardText>
+      
+      </CardBody>
     </Card>
   );
 };

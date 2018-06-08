@@ -1,17 +1,53 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import DatePicker from "react-date-picker";
+import DateTimePicker from "react-datetime-picker";
 import fetch from "../../services/userServices";
+import Dropzone from "react-dropzone";
+import request from "superagent";
+import "./component.css";
+const CLOUDINARY_UPLOAD_PRESET = "nyk3aosr";
+const CLOUDINARY_UPLOAD_URL =
+  "https://api.cloudinary.com/v1_1/dtxifoif4/image/upload";
 
 class CreateEvent extends Component {
   state = {
     event_name: "",
     event_date: new Date(),
-    event_time: "",
     event_location: "",
     event_img: null,
-    event_owners: this.props._id
+    event_owners: this.props._id,
+    event_desc: '',
+    uploadedFileCloudinaryUrl: undefined,
+    spin: ""
   };
+
+  onImageDrop(files) {
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleImageUpload(files[0]);
+  }
+  handleImageUpload(file) {
+    this.setState({ spin: "spinner-1" });
+    let upload = request
+      .post(CLOUDINARY_UPLOAD_URL)
+      .field("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+      .field("file", file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== "") {
+        this.setState({
+          uploadedFileCloudinaryUrl: response.body.secure_url,
+          spin: ""
+        });
+      }
+    });
+  }
 
   onChange = event_date => this.setState({ event_date });
   onChange1 = time => this.setState({ time });
@@ -22,10 +58,12 @@ class CreateEvent extends Component {
       event_name: this.state.event_name,
       event_date: this.state.event_date,
       event_location: this.state.event_location,
-      event_time: this.state.event_time,
-      event_owners: this.props._id
+      event_desc: this.state.event_desc,
+      event_owners: this.props._id,
+      event_img: this.state.uploadedFileCloudinaryUrl
     };
-    await fetch.createNewEvent(this.props._id, eventData);
+    let x = await fetch.createNewEvent(this.props._id, eventData);
+    console.log(x, "HERE!!!");
     this.props.history.push("/dashboard/#update");
   };
 
@@ -53,20 +91,10 @@ class CreateEvent extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="exampleTime">Time</Label>
-            <Input
-              onChange={this.onChangeForm.bind(this)}
-              type="time"
-              name="event_time"
-              placeholder="time placeholder"
-              value={this.state.event_time}
-            />
-          </FormGroup>
-          <FormGroup>
             <Label className="d-block" for="exampleDate">
-              Date:{" "}
+              Date &amp; Time(24hr):{" "}
             </Label>
-            <DatePicker
+            <DateTimePicker
               onChange={this.onChange}
               value={this.state.event_date}
             />
@@ -78,6 +106,50 @@ class CreateEvent extends Component {
               value={this.state.event_location}
               name="event_location"
             />
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleTime">Description:</Label>
+            <Input
+              onChange={this.onChangeForm.bind(this)}
+              type="textarea"
+              name="event_desc"
+              placeholder="A short description about the event..."
+              value={this.state.event_desc}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label className="d-block" for="cell">
+              Event Image:
+            </Label>
+            <Dropzone
+              className={
+                "h-auto border border-danger rounded d-inline-block bg-danger text-light position-relative " +
+                this.state.spin
+              }
+              style={{
+                maxWidth: "200px",
+                minHeight: "100px",
+                minWidth: "100px"
+              }}
+              multiple={false}
+              accept="image/*"
+              onDrop={this.onImageDrop.bind(this)}
+            >
+              {!this.state.uploadedFileCloudinaryUrl ? (
+                this.state.spin === "spinner-1" ? (
+                  <div />
+                ) : (
+                  <p className={"my-auto p-2"}>
+                    Drop an image or click to select a file to upload.
+                  </p>
+                )
+              ) : (
+                <img
+                  className="img-fluid"
+                  src={this.state.uploadedFileCloudinaryUrl}
+                />
+              )}
+            </Dropzone>
           </FormGroup>
           <Button>Submit</Button>
         </Form>

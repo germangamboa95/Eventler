@@ -46,6 +46,8 @@ class EventSignUp extends Component {
       this.state.event_id,
       test.data._id
     );
+    console.log(test.data._id, 'eeeee');
+    await fetch.sendConfirm(test.data._id,this.state.event_name)
     this.setState({ done: true})
     console.log(eventMsg);
   };
