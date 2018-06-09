@@ -63,7 +63,7 @@ class CreateEvent extends Component {
       event_img: this.state.uploadedFileCloudinaryUrl
     };
     let x = await fetch.createNewEvent(this.props._id, eventData);
-    console.log(x, "HERE!!!");
+ 
     this.props.history.push("/dashboard/#update");
   };
 
@@ -77,7 +77,7 @@ class CreateEvent extends Component {
   };
 
   render() {
-    console.log(this.props);
+
     return (
       <div className="mt-5">
         <h2>Create New Event:</h2>

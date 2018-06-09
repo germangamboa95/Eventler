@@ -4,7 +4,6 @@ import Notifications from '../Notifications';
 
 
 const DashContainer = props => {
-  console.log('asdfghjk')
   return (
     <div>
       <Notifications {...props}/>

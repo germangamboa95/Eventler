@@ -202,17 +202,31 @@ module.exports = {
       res.json({ msg: error.message });
     }
   },
-  checkInAttendee: async (req, res) => {
+  checkInToggle: async (req, res) => {
     const user_id = req.body.user_id;
     const event_id = req.body.event_id;
 
     try {
-      const dbData = await db.Event.findByIdAndUpdate(
-        event_id,
-        { $push: { event_attendees_checkedIn: user_id } },
-        { new: true }
-      );
-      res.json(dbData)
+      const checkForExistingUser = await db.Event.find({
+        _id: event_id,
+        event_attendees_checkedIn: { $in: [user_id] }
+      });
+      console.log(checkForExistingUser)
+      if (checkForExistingUser.length === 1) {
+        const dbData = await db.Event.findByIdAndUpdate(
+          event_id,
+          { $pull: { event_attendees_checkedIn: user_id } },
+          { new: true }
+        );
+        res.json(dbData);
+      } else {
+        const dbData = await db.Event.findByIdAndUpdate(
+          event_id,
+          { $push: { event_attendees_checkedIn: user_id } },
+          { new: true }
+        );
+        res.json(dbData);
+      }
     } catch (error) {
       res.json(error.message);
     }

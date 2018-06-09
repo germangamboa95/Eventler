@@ -6,6 +6,7 @@ import AttendeeTable from "../attendeeTable/attendeeTable";
 import Messenger from "../messenger/";
 import InviteLink from "../inviteLink";
 import moment from "moment";
+import CheckInTable from "../checkInTable";
 // move this to a the pages folder!!
 class EventManager extends Component {
   state = {
@@ -38,7 +39,11 @@ class EventManager extends Component {
   };
 
   checkInAttendee = async id => {
-    const response = await fetch.checkIn(id,this.state.event_id)
+    console.log(this.state);
+    const response = await fetch.checkIn(id, this.state.event_id);
+    this.setState({
+      event_attendees_checkedIn: response.data.event_attendees_checkedIn
+    });
   };
 
   deleteFromEvent = async id => {
@@ -99,13 +104,12 @@ class EventManager extends Component {
         </div>
       ) : (
         <div>
-          <AttendeeTable
+          <CheckInTable
             title="Check In"
             whichList={this.state.event_attendees_approved}
             toggle={this.checkInAttendee}
             sendText={this.handleTextReqFromTable}
             sendEmail={this.handleEmailReqFromTable}
-            btn={"Check In"}
             list="event_attendees_approved"
             {...this.state}
           />

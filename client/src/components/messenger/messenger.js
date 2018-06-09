@@ -11,7 +11,6 @@ import {
 
 
 const Messenger = props => {
-  console.log(props.match)
   const nameGenerator = () => {
     // TODO: Fix this to only by one statement and not two concat ones.
     try {

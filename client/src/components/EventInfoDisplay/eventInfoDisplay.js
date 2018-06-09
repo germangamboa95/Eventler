@@ -15,6 +15,8 @@ const EventInfoDisplay = props => {
       <CardImg top width="100%" src={props.event_img} alt="Card image cap" />
       <CardBody className="text-center">
         <CardTitle>{props.event_name}</CardTitle>
+        <CardSubtitle>Description:</CardSubtitle>
+        <CardText>{props.event_desc}</CardText>
         <CardSubtitle>Location:</CardSubtitle>
         <CardText>{props.event_location}</CardText>
         <CardSubtitle>Date &amp; Time:</CardSubtitle>
