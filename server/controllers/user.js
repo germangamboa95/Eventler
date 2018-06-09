@@ -5,7 +5,7 @@ module.exports = {
   signUp: async (req, res) => {
     const provider = req.locals.provider;
     const user_id = req.locals.id;
-    console.log(user_id);
+
     const userData = req.locals._json;
     const dbData = await db.User.find({ provider: provider, id: user_id });
 

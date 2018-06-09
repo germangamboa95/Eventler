@@ -22,7 +22,7 @@ class EventManager extends Component {
     this.setState({
       isToday:
         moment(eventData.data.event_date).format("DD") ===
-        moment(Date()).format("DD")
+        moment(new Date()).format("DD")
           ? false
           : true
     });
@@ -38,7 +38,7 @@ class EventManager extends Component {
   };
 
   checkInAttendee = async id => {
-    // check in guest
+    const response = await fetch.checkIn(id,this.state.event_id)
   };
 
   deleteFromEvent = async id => {
@@ -80,7 +80,6 @@ class EventManager extends Component {
           <InviteLink event_id={this.state.event_id} />
           <AttendeeTable
             title="Awaiting Approval"
-            approveAttendee={this.approveAttendee}
             whichList={this.state.event_signed_up}
             toggle={this.approveAttendee}
             sendText={this.handleTextReqFromTable}
@@ -90,7 +89,6 @@ class EventManager extends Component {
           />
           <AttendeeTable
             title="Attending"
-            approveAttendee={this.approveAttendee}
             whichList={this.state.event_attendees_approved}
             toggle={this.revokeAttendee}
             sendText={this.handleTextReqFromTable}
@@ -103,12 +101,11 @@ class EventManager extends Component {
         <div>
           <AttendeeTable
             title="Check In"
-            approveAttendee={this.approveAttendee}
             whichList={this.state.event_attendees_approved}
-            toggle={this.revokeAttendee}
+            toggle={this.checkInAttendee}
             sendText={this.handleTextReqFromTable}
             sendEmail={this.handleEmailReqFromTable}
-            btn={"Revoke"}
+            btn={"Check In"}
             list="event_attendees_approved"
             {...this.state}
           />

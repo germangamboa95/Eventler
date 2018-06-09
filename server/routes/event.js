@@ -27,4 +27,6 @@ router.post('/attend/event', controllers.events.attendEvent)
 
 //  Event completed sort all attendees for analysis
 router.post('/event/done', controllers.events.eventCompleted)
+
+router.post('/event/checkin', controllers.events.checkInAttendee)
 module.exports = router;

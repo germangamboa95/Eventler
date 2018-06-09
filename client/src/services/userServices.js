@@ -36,5 +36,8 @@ export default {
     },
     sendConfirm: (id, e_name) => {
         return Api().post('coms/email/send/confirm/signup', {_id: id, event_name: e_name})
+    },
+    checkIn: (user_id, event_id) => {
+        return Api().post('event/event/checkin', {user_id, event_id})
     }
 }

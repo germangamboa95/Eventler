@@ -147,6 +147,7 @@ class CreateEvent extends Component {
                 <img
                   className="img-fluid"
                   src={this.state.uploadedFileCloudinaryUrl}
+                  alt="Uploaded content."
                 />
               )}
             </Dropzone>

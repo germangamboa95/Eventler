@@ -10,11 +10,8 @@ import {
 } from "reactstrap";
 import "./table.css";
 const AttendeeTable = props => {
-  console.log(props, 'adfs')
   if (props.whichList) {
     const whichlistIdStr = props.whichList.map(item => item._id).join(",");
-    const btnState = "disabled";
-    console.log(whichlistIdStr);
     const awaitingApproval = props.whichList.map((item, i) => (
       <tr key={i}>
         <th scope="row">{i + 1}</th>
@@ -73,7 +70,7 @@ const AttendeeTable = props => {
           <tbody>{awaitingApproval}</tbody>
         </Table>
         <CardFooter className="d-flex flex-row justify-content-end">
-          {props.whichList.length != 0 ? (
+          {props.whichList.length !== 0 ? (
             <div>
               <Button
                 size="sm"
