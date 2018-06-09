@@ -5,21 +5,27 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AttendeeTable from "../attendeeTable/attendeeTable";
 import Messenger from "../messenger/";
 import InviteLink from "../inviteLink";
-import moment from 'moment';
+import moment from "moment";
 // move this to a the pages folder!!
 class EventManager extends Component {
   state = {
     event_id: this.props.match.params.id,
- 
+    isToday: false
   };
 
-  
   componentDidMount() {
     this.loadEventData();
   }
   loadEventData = async () => {
     const eventData = await fetch.loadEventData(this.state.event_id);
     this.setState(eventData.data);
+    this.setState({
+      isToday:
+        moment(eventData.data.event_date).format("DD") ===
+        moment(Date()).format("DD")
+          ? false
+          : true
+    });
   };
 
   approveAttendee = async id => {
@@ -29,6 +35,14 @@ class EventManager extends Component {
   revokeAttendee = async id => {
     const eventData = await fetch.revokeAttendee(this.state.event_id, id);
     this.setState(eventData.data);
+  };
+
+  checkInAttendee = async id => {
+    // check in guest
+  };
+
+  deleteFromEvent = async id => {
+    // delete guest from event
   };
 
   handleTextReqFromTable = async (id, list) => {
@@ -52,61 +66,54 @@ class EventManager extends Component {
       [event.target[1].name]: event.target[1].value
     };
     const test = await fetch.sendManyEmail(dataToSend);
-    console.log(test, 'HERE')
+    console.log(test, "HERE");
     this.props.history.push(this.props.match.url);
   };
-  isToday = ( ) => {
 
-  
-
-    return (moment(this.state.event_date).format("D")  === moment(Date()).format("D") )? false : true
-  
-
-  }
   render() {
     // Move to own file later!
-    const DataTables = () => (
-      (this.isToday())?<div>
-        <EventInfo {...this.state} />
-        <h4 className="mt-3">Invite Link:</h4>
-        <InviteLink event_id={this.state.event_id}/>
-        <AttendeeTable
-          title="Awaiting Approval"
-          approveAttendee={this.approveAttendee}
-          whichList={this.state.event_signed_up}
-          toggle={this.approveAttendee}
-          sendText={this.handleTextReqFromTable}
-          sendEmail={this.handleEmailReqFromTable}
-          list="event_signed_up"
-          btn={"Approve"}
-    
-        />
-        <AttendeeTable
-          title="Attending"
-          approveAttendee={this.approveAttendee}
-          whichList={this.state.event_attendees_approved}
-          toggle={this.revokeAttendee}
-          sendText={this.handleTextReqFromTable}
-          sendEmail={this.handleEmailReqFromTable}
-          btn={"Revoke"}
-          list="event_attendees_approved"
-        />
-        </div>
-        :
+    const DataTables = () =>
+      this.state.isToday ? (
         <div>
-            <AttendeeTable
-          title="Check In"
-          approveAttendee={this.approveAttendee}
-          whichList={this.state.event_attendees_approved}
-          toggle={this.revokeAttendee}
-          sendText={this.handleTextReqFromTable}
-          sendEmail={this.handleEmailReqFromTable}
-          btn={"Revoke"}
-          list="event_attendees_approved"
-      
-        />
-      </div>
-    );
+          <EventInfo {...this.state} />
+          <h4 className="mt-3">Invite Link:</h4>
+          <InviteLink event_id={this.state.event_id} />
+          <AttendeeTable
+            title="Awaiting Approval"
+            approveAttendee={this.approveAttendee}
+            whichList={this.state.event_signed_up}
+            toggle={this.approveAttendee}
+            sendText={this.handleTextReqFromTable}
+            sendEmail={this.handleEmailReqFromTable}
+            list="event_signed_up"
+            btn={"Approve"}
+          />
+          <AttendeeTable
+            title="Attending"
+            approveAttendee={this.approveAttendee}
+            whichList={this.state.event_attendees_approved}
+            toggle={this.revokeAttendee}
+            sendText={this.handleTextReqFromTable}
+            sendEmail={this.handleEmailReqFromTable}
+            btn={"Revoke"}
+            list="event_attendees_approved"
+          />
+        </div>
+      ) : (
+        <div>
+          <AttendeeTable
+            title="Check In"
+            approveAttendee={this.approveAttendee}
+            whichList={this.state.event_attendees_approved}
+            toggle={this.revokeAttendee}
+            sendText={this.handleTextReqFromTable}
+            sendEmail={this.handleEmailReqFromTable}
+            btn={"Revoke"}
+            list="event_attendees_approved"
+            {...this.state}
+          />
+        </div>
+      );
 
     return (
       <Switch>

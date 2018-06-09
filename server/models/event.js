@@ -36,6 +36,10 @@ const Event = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'User'
   }],
+  event_attendees_checkedIn:[{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   event_attendees_completed:[{
     type: Schema.Types.ObjectId,
     ref: 'User'

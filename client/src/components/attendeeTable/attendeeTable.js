@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import "./table.css";
 const AttendeeTable = props => {
+  console.log(props, 'adfs')
   if (props.whichList) {
     const whichlistIdStr = props.whichList.map(item => item._id).join(",");
     const btnState = "disabled";
@@ -65,8 +66,8 @@ const AttendeeTable = props => {
               <th>Last Name</th>
               <th id="emailTp">Email</th>
               <th id="textTp">Phone</th>
-              <th>Approve</th>
-              <th>Remove</th>
+              <th>{props.btn}</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>{awaitingApproval}</tbody>

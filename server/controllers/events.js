@@ -1,7 +1,6 @@
 const db = require("../models");
 const jwt = require("jsonwebtoken");
 
-
 module.exports = {
   createEvent: async (req, res) => {
     const data = req.body;
@@ -192,12 +191,30 @@ module.exports = {
     const eventId = req.body.event_id;
     //  Get all the event and move everyone form approve to attended
     try {
-        const dbData = await db.Event.findOne({ _id: eventId })
-        const updatedData = await db.Event.findByIdAndUpdate(eventId, {event_attendees_completed: dbData.event_attendees_approved}, {new : true})
-        res.json(updatedData)
+      const dbData = await db.Event.findOne({ _id: eventId });
+      const updatedData = await db.Event.findByIdAndUpdate(
+        eventId,
+        { event_attendees_completed: dbData.event_attendees_approved },
+        { new: true }
+      );
+      res.json(updatedData);
     } catch (error) {
-        res.json({msg: error.message})
+      res.json({ msg: error.message });
     }
+  },
+  checkInAttendee: async (req, res) => {
+    const user_id = req.body.user_id;
+    const event_id = req.body.event_id;
 
+    try {
+      const dbData = await db.Event.findByIdAndUpdate(
+        event_id,
+        { $push: { event_attendees_checkedIn: user_id } },
+        { new: true }
+      );
+      res.json(dbData)
+    } catch (error) {
+      res.json(error.message);
+    }
   }
 };
