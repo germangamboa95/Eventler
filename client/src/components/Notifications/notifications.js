@@ -3,7 +3,7 @@ import { Card,CardTitle, CardBody, ListGroup, ListGroupItem } from "reactstrap";
 
 const Notifications = props => (
   <Card className="mt-5">
-    <CardTitle className="text-center">Information Center</CardTitle>
+    <CardTitle className="text-center mt-1">Information Center</CardTitle>
     <CardBody>
       <h4>Welcome back, {props.first_name}</h4>
       <h5 className="text-center">Notifications</h5>

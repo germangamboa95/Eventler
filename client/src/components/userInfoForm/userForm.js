@@ -4,7 +4,8 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 const userForm = props => {
   console.log(props, "l");
   return (
-    <Form onSubmit={(e) => props.handleSubmit(e)}>
+    <Form onSubmit={(e) => props.handleSubmit(e)} className="mt-4 card p-5 mx-auto">
+      <h2>Join The Event!</h2>
       <FormGroup>
         <Label for="fname">First Name:</Label>
         <Input
@@ -58,7 +59,7 @@ const userForm = props => {
           required
         />
       </FormGroup>
-      <Button>Submit</Button>
+      <Button color="warning">Submit</Button>
     </Form>
   );
 };

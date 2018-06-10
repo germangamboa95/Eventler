@@ -78,7 +78,7 @@ class Navbars extends React.Component {
 
     return (
       <div>
-        <Navbar color="dark" dark expand="md">
+        <Navbar color="dark" dark expand="md" style={navStyle}>
           <Link className="navbar-brand" to={(this.props.loggedIn)?'/dashboard':'/'}>Evently</Link>
 
           <NavbarToggler onClick={this.toggle} />
@@ -89,6 +89,10 @@ class Navbars extends React.Component {
       </div>
     );
   }
+}
+
+const navStyle = {
+  background: 'linear-gradient(to left, #0f2027, #203a43, #2c5364)'
 }
 
 export default withRouter(Navbars);

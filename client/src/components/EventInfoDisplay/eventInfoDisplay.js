@@ -8,6 +8,7 @@ import {
   CardTitle
 } from "reactstrap";
 import moment from "moment";
+import './display.css';
 
 const EventInfoDisplay = props => {
   return (

@@ -211,7 +211,7 @@ module.exports = {
         _id: event_id,
         event_attendees_checkedIn: { $in: [user_id] }
       });
-      console.log(checkForExistingUser)
+      console.log(checkForExistingUser);
       if (checkForExistingUser.length === 1) {
         const dbData = await db.Event.findByIdAndUpdate(
           event_id,
@@ -227,6 +227,20 @@ module.exports = {
         );
         res.json(dbData);
       }
+    } catch (error) {
+      res.json(error.message);
+    }
+  },
+  removeGuest: async (req, res) => {
+    const guest_id = req.body.user_id;
+    const event_id = req.body.event_id;
+    const table = req.body.currentTable;
+
+    try {
+      const dbData = await db.Event.findByIdAndUpdate(event_id, {
+        $pull: { [table]: guest_id }
+      });
+      res.json(dbData);
     } catch (error) {
       res.json(error.message);
     }

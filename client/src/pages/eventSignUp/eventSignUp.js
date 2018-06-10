@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
+import { Container, Row } from "reactstrap";
 import fetch from "../../services/userServices";
 import SignUpForm from "../../components/userInfoForm";
 import EventDisplay from "../../components/EventInfoDisplay";
@@ -46,9 +46,9 @@ class EventSignUp extends Component {
       this.state.event_id,
       test.data._id
     );
-    console.log(test.data._id, 'eeeee');
-    await fetch.sendConfirm(test.data._id,this.state.event_name)
-    this.setState({ done: true})
+    console.log(test.data._id, "eeeee");
+    await fetch.sendConfirm(test.data._id, this.state.event_name);
+    this.setState({ done: true });
     console.log(eventMsg);
   };
 
@@ -57,14 +57,19 @@ class EventSignUp extends Component {
     return (
       <Container>
         {!this.state.done ? (
-          <div>
-            <EventDisplay {...this.state} />
+          <Row>
+            <div className="col-md-6">
+ 
+              <EventDisplay {...this.state} />
+            </div>
+
             <SignUpForm
+              className="col-md-6"
               {...this.state}
               inputChange={this.handleInputChange}
               handleSubmit={this.handleSubmit}
             />
-          </div>
+          </Row>
         ) : (
           <ThankYou />
         )}

@@ -36,18 +36,19 @@ const AttendeeTable = props => {
           </Button>
         </td>
         <td>
-          <Badge
+          <Button
+            size="sm"
             color="primary"
             className="btn btn-primary"
             onClick={props.toggle.bind(this, item._id)}
           >
             {props.btn}
-          </Badge>
+          </Button>
         </td>
         <td>
-          <Badge color="primary" className="btn btn-primary">
+          <Button size="sm" color="primary" className="btn btn-primary">
             Delete From Event
-          </Badge>
+          </Button>
         </td>
       </tr>
     ));
@@ -55,7 +56,7 @@ const AttendeeTable = props => {
     return (
       <Card className="mt-3 text-center">
         <CardTitle className="my-auto py-1">{props.title}</CardTitle>
-        <Table responsive>
+        <Table responsive className="mb-0">
           <thead>
             <tr>
               <th>#</th>
@@ -74,12 +75,14 @@ const AttendeeTable = props => {
             <div>
               <Button
                 size="sm"
+                color="success"
                 className="mr-1"
                 onClick={props.sendEmail.bind(this, whichlistIdStr, props.list)}
               >
                 Email All
               </Button>
               <Button
+                color="success"
                 size="sm"
                 onClick={props.sendText.bind(this, whichlistIdStr, props.list)}
               >

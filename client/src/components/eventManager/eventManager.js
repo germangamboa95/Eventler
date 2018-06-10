@@ -80,7 +80,9 @@ class EventManager extends Component {
     const DataTables = () =>
       this.state.isToday ? (
         <div>
+          <div className="w-50">
           <EventInfo {...this.state} />
+          </div>
           <h4 className="mt-3">Invite Link:</h4>
           <InviteLink event_id={this.state.event_id} />
           <AttendeeTable

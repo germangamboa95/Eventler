@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Table, CardTitle, Badge } from "reactstrap";
+import { Card, Table, CardTitle,Button } from "reactstrap";
 import moment from "moment";
 import InviteLink from "../inviteLink";
 
@@ -7,7 +7,7 @@ const MyEvents = props => {
   if (props.events_owned !== undefined) {
     return (
       <Card className="mt-5 border-0">
-        <CardTitle className="text-center my-auto">Events Owned</CardTitle>
+        <CardTitle className="text-center my-auto">Up Coming Events</CardTitle>
         <Table responsive bordered className="text-center my-auto">
           <thead>
             <tr>
@@ -37,13 +37,14 @@ const MyEvents = props => {
                 </td>
 
                 <td>
-                  <Badge
+                  <Button
+                    size="sm"
                     color="primary"
                     className="btn btn-primary"
                     onClick={props.ManageEventReq.bind(this, item._id)}
                   >
                     Manage
-                  </Badge>
+                  </Button>
                 </td>
               </tr>
             ))}

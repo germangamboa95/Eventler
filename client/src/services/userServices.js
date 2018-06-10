@@ -39,5 +39,8 @@ export default {
     },
     checkIn: (user_id, event_id) => {
         return Api().post('event/event/checkin', {user_id, event_id})
+    },
+    deleteGuest: (user_id, event_id, currentTable) => {
+        return Api().post('event/managed/events/delete/guest', {user_id, event_id, currentTable})
     }
 }

@@ -1,0 +1,23 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  z-index: 100;
+  background-image: url('https://images.pexels.com/photos/5156/people-eiffel-tower-lights-night.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.sign-u {
+    color: #000;
+}
+
+.anti-hero {
+  height: 50vh;
+
+}
+
+.p-copy{
+    width: 80%;
+}

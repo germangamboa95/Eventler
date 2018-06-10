@@ -12,6 +12,9 @@ router.get('/managed/events/get/:id', controllers.events.getOwnedEvents)
 router.post('/managed/events/approve', controllers.events.approveAttend)
 router.post('/managed/events/revoke', controllers.events.revokeAttend)
 
+// Delete guest from event
+router.post('/managed/events/delete/guest', controllers.events.removeGuest)
+
 // Create Events 
 router.post('/managed/create/event', controllers.events.createEvent)
 
