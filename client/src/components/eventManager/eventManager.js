@@ -7,11 +7,24 @@ import Messenger from "../messenger/";
 import InviteLink from "../inviteLink";
 import moment from "moment";
 import CheckInTable from "../checkInTable";
+import userServices from "../../services/userServices";
+import { Row } from "reactstrap";
+import EventOptions from "../eventOptions";
+
 // move this to a the pages folder!!
 class EventManager extends Component {
   state = {
     event_id: this.props.match.params.id,
-    isToday: false
+    isToday: false,
+    modal: false,
+    componentInModal: 'p'
+  };
+
+  toggle = (whichComp) => {
+    this.setState({
+      modal: !this.state.modal,
+      componentInModal: whichComp
+    });
   };
 
   componentDidMount() {
@@ -46,10 +59,6 @@ class EventManager extends Component {
     });
   };
 
-  deleteFromEvent = async id => {
-    // delete guest from event
-  };
-
   handleTextReqFromTable = async (id, list) => {
     this.props.history.push(
       `${this.props.match.url}/communicate/text/${id}/${list}`
@@ -71,8 +80,16 @@ class EventManager extends Component {
       [event.target[1].name]: event.target[1].value
     };
     const test = await fetch.sendManyEmail(dataToSend);
-    console.log(test, "HERE");
     this.props.history.push(this.props.match.url);
+  };
+
+  handlerDeleteGuest = async (id, list) => {
+    const response = await userServices.deleteGuest(
+      id,
+      this.state.event_id,
+      list
+    );
+    this.loadEventData();
   };
 
   render() {
@@ -80,9 +97,14 @@ class EventManager extends Component {
     const DataTables = () =>
       this.state.isToday ? (
         <div>
-          <div className="w-50">
-          <EventInfo {...this.state} />
-          </div>
+          <Row>
+            <div className="col-md-6">
+              <EventInfo {...this.state} />
+            </div>
+            <div className="col-md-6">
+              <EventOptions renderComp={this.state.componentInModal} modal={this.state.modal}toggle={this.toggle}/>
+            </div>
+          </Row>
           <h4 className="mt-3">Invite Link:</h4>
           <InviteLink event_id={this.state.event_id} />
           <AttendeeTable
@@ -93,6 +115,7 @@ class EventManager extends Component {
             sendEmail={this.handleEmailReqFromTable}
             list="event_signed_up"
             btn={"Approve"}
+            deleteGuest={this.handlerDeleteGuest}
           />
           <AttendeeTable
             title="Attending"
@@ -102,6 +125,7 @@ class EventManager extends Component {
             sendEmail={this.handleEmailReqFromTable}
             btn={"Revoke"}
             list="event_attendees_approved"
+            deleteGuest={this.handlerDeleteGuest}
           />
         </div>
       ) : (

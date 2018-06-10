@@ -41,15 +41,18 @@ class EventSignUp extends Component {
       [event.target[3].name]: event.target[3].value
     };
     const test = await fetch.newUserForEvent(dataToSend);
-    this.setState(test.data);
-    const eventMsg = await fetch.signUpForEvent(
-      this.state.event_id,
-      test.data._id
-    );
-    console.log(test.data._id, "eeeee");
-    await fetch.sendConfirm(test.data._id, this.state.event_name);
+  
+    this.setState(test.data[0], async() => {
+      console.log(this.state)
+      const eventMsg = await fetch.signUpForEvent(
+        this.state.event_id,
+        this.state._id
+      );
+      await fetch.sendConfirm(this.state._id, this.state.event_name);
+
+    });
     this.setState({ done: true });
-    console.log(eventMsg);
+    
   };
 
   render() {

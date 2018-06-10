@@ -64,17 +64,17 @@ class Home extends Component {
             <Row>
               <div className="col-md-4 text-center">
               <h3>Manage Multiple Events</h3>
-              <i class="far fa-calendar-alt fa-5x"></i>
+              <i className="far fa-calendar-alt fa-5x"></i>
               <p className="p-copy mx-auto mt-2">With Evently you can manage multiple events in one spot. No more switching apps.</p>
               </div>
               <div className="col-md-4 text-center">
               <h3>Boundless Communication</h3>
-              <i class="far fa-envelope fa-5x"></i>
+              <i className="far fa-envelope fa-5x"></i>
               <p className="p-copy mx-auto mt-2">Stay in touch with all your guests via text or E-mail.</p>
               </div>
               <div className="col-md-4 text-center">
               <h3>Manage Multiple Events</h3>
-              <i class="fas fa-chart-pie fa-5x"></i>
+              <i className="fas fa-chart-pie fa-5x"></i>
               <p className="p-copy mx-auto mt-2">With Evently you can manage multiple events in one spot. No more switching apps.</p>
               </div>
         
@@ -84,7 +84,7 @@ class Home extends Component {
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
-          className={this.props.className}
+          
         >
           <ModalBody>
             <OauthBtns msg="Log In" />

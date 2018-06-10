@@ -46,7 +46,7 @@ const AttendeeTable = props => {
           </Button>
         </td>
         <td>
-          <Button size="sm" color="primary" className="btn btn-primary">
+          <Button size="sm" color="primary" className="btn btn-primary" onClick={props.deleteGuest.bind(this, item._id, props.list)}>
             Delete From Event
           </Button>
         </td>
