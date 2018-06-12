@@ -10,18 +10,20 @@ import {
   ModalBody
 } from "reactstrap";
 
-import EventInfoUpdate from '../userInfoForm';
+import Messenger from "../messenger/";
+import EventInfoUpdate from '../../components/createEvent';
 
 const EventOptions = props => {
-    const whichContainer = (Comp)=> <Comp>This will be inside a p tag.</Comp>
+    const whichContainer = (Comp)=> <Comp/>
+    console.log(props, 'options container')
   return (
     <Card className="mt-4">
       <CardHeader className="text-center">
         <CardTitle>Event Options</CardTitle>
         <CardBody>
           <ListGroup>
-            <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate)}>Update Event Details</ListGroupItem>
-            <ListGroupItem>Invite Blast Via Email</ListGroupItem>
+            <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate)} >Update Event Details</ListGroupItem>
+            <ListGroupItem >Invite Blast Via Email</ListGroupItem>
             <ListGroupItem>Invite Blast Via Text</ListGroupItem>
             <ListGroupItem>Add Event Admin</ListGroupItem>
             <ListGroupItem>Remove Event Admin</ListGroupItem>

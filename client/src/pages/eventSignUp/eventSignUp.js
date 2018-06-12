@@ -41,8 +41,8 @@ class EventSignUp extends Component {
       [event.target[3].name]: event.target[3].value
     };
     const test = await fetch.newUserForEvent(dataToSend);
-  
-    this.setState(test.data[0], async() => {
+    
+    this.setState(test.data, async() => {
       console.log(this.state)
       const eventMsg = await fetch.signUpForEvent(
         this.state.event_id,

@@ -7,7 +7,7 @@ const socialLogin = props => {
       <CardBody className="text-center d-flex flex-column justify-content-around">
         <CardTitle>{props.msg}</CardTitle>
         <Button
-          href="http://localhost:3000/auth/facebook"
+          href="http://localhost:3000/api/auth/facebook"
           className="m-1 d-flex justify-content-start w-100"
         >
           <i className="fab fa-facebook-square fa-1x my-auto mr-3" />
@@ -16,7 +16,7 @@ const socialLogin = props => {
           </span>
         </Button>
         <Button
-          href="http://localhost:3000/auth/google"
+          href="http://localhost:3000/api/auth/google"
           className="m-1 d-flex justify-content-start w-100"
         >
           <i className="fab fa-google fa-1x my-auto mr-3" />

@@ -62,9 +62,10 @@ module.exports = {
     const info = req.body;
     info.provider = 'App';
     info.id = Math.random();
-    console.log(info);
-    const dbData = await db.User.find({ email: info.email });
-    if (dbData.length == 1) {
+
+    const dbData = await db.User.findOne({ email: info.email });
+    console.log(dbData);
+    if (dbData) {
       res.json(dbData);
     } else {
       const userAdded = await db.User.create(info);

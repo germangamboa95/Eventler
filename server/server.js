@@ -5,7 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
-
+const serveStatic = require('serve-static');
 //  Require internal packages
 const routes = require("./routes");
 const passport = require("./scripts/passportConfig")
@@ -25,10 +25,12 @@ app.use(passport.initialize());
 app.use(bodyParser.json());
 
 // App routes
-app.use('/auth', routes.Auth);
-app.use("/user", routes.User);
-app.use("/event", routes.Event);
-app.use('/coms', routes.Coms);
+
+app.use('/api/auth', routes.Auth);
+app.use("/api/user", routes.User);
+app.use("/api/event", routes.Event);
+app.use('/api/coms', routes.Coms);
+
 //  Error Catcher
 app.use(function(error, req, res, next) {
   console.log(error);

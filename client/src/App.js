@@ -26,16 +26,20 @@ class App extends Component {
             updateLoginState={this.updateLoginState}
             updateUserData={this.updateUserData}
           />
+       
           <Switch>
+
             <Route
               path="/dashboard"
               render={routeProps => (
+                
                 <Dashboard
                   {...routeProps}
                   {...this.state}
                   updateLoginState={this.updateLoginState}
                   updateUserData={this.updateUserData}
                 />
+
               )}
             />
             <Route
@@ -62,7 +66,9 @@ class App extends Component {
               )}
             />
             <Route component={NotFound} />
+          
           </Switch>
+       
         </div>
       </Router>
     );

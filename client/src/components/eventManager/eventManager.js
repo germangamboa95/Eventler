@@ -11,25 +11,28 @@ import userServices from "../../services/userServices";
 import { Row } from "reactstrap";
 import EventOptions from "../eventOptions";
 
+
 // move this to a the pages folder!!
 class EventManager extends Component {
   state = {
     event_id: this.props.match.params.id,
     isToday: false,
     modal: false,
-    componentInModal: 'p'
+    componentInModal: '<h1>hello</h1>'
   };
 
-  toggle = (whichComp) => {
+  toggle = whichComp => {
+    const x = (typeof whichComp != 'object')? whichComp : () => '';
     this.setState({
       modal: !this.state.modal,
-      componentInModal: whichComp
+      componentInModal: x
     });
   };
 
   componentDidMount() {
     this.loadEventData();
   }
+  
   loadEventData = async () => {
     const eventData = await fetch.loadEventData(this.state.event_id);
     this.setState(eventData.data);
@@ -45,14 +48,15 @@ class EventManager extends Component {
   approveAttendee = async id => {
     const eventData = await fetch.approveAttendee(this.state.event_id, id);
     this.setState(eventData.data);
+
   };
   revokeAttendee = async id => {
     const eventData = await fetch.revokeAttendee(this.state.event_id, id);
     this.setState(eventData.data);
+
   };
 
   checkInAttendee = async id => {
-    console.log(this.state);
     const response = await fetch.checkIn(id, this.state.event_id);
     this.setState({
       event_attendees_checkedIn: response.data.event_attendees_checkedIn
@@ -89,11 +93,13 @@ class EventManager extends Component {
       this.state.event_id,
       list
     );
+
     this.loadEventData();
   };
 
   render() {
     // Move to own file later!
+    console.log(this.props)
     const DataTables = () =>
       this.state.isToday ? (
         <div>
@@ -102,11 +108,19 @@ class EventManager extends Component {
               <EventInfo {...this.state} />
             </div>
             <div className="col-md-6">
-              <EventOptions renderComp={this.state.componentInModal} modal={this.state.modal}toggle={this.toggle}/>
+              <EventOptions
+                renderComp={this.state.componentInModal}
+                modal={this.state.modal}
+                toggle={this.toggle}
+                {...this.state}
+                {...this.props}
+                dispatchMsg={this.handlerDispatchMsg}
+              />
             </div>
           </Row>
           <h4 className="mt-3">Invite Link:</h4>
           <InviteLink event_id={this.state.event_id} />
+        
           <AttendeeTable
             title="Awaiting Approval"
             whichList={this.state.event_signed_up}
