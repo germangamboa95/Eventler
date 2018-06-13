@@ -61,10 +61,10 @@ const CheckInTable = props => {
 
     return (
       <Card className="mt-3 text-center">
-        <CardTitle className="my-auto py-1">{props.title}</CardTitle>
+        <CardTitle className="my-auto py-1 color ">{props.title}</CardTitle>
         <Table responsive>
           <thead>
-            <tr>
+            <tr className="th-color">
               <th>#</th>
               <th>First Name</th>
               <th>Last Name</th>

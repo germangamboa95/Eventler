@@ -23,7 +23,7 @@ const EventInfoDisplay = props => {
         <CardSubtitle>Date &amp; Time:</CardSubtitle>
         <CardText>{moment(props.event_date).format("MMMM Do YYYY, h:mm a")}</CardText>
         <CardSubtitle>Number Attending:</CardSubtitle>
-        <CardText>{props.event_signed_up ? props.event_signed_up.length : 0}</CardText>
+        <CardText>{(props.event_signed_up || props.event_attendees_approved )? props.event_signed_up.length +props.event_attendees_approved.length : 0}</CardText>
       
       </CardBody>
     </Card>

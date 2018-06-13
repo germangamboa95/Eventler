@@ -2,14 +2,14 @@ import React from "react";
 import { Card, Table, CardTitle,Button } from "reactstrap";
 import moment from "moment";
 import InviteLink from "../inviteLink";
-
+import './eventTable.css';
 const MyEvents = props => {
   if (props.events_owned !== undefined) {
     return (
-      <Card className="mt-5 border-0">
-        <CardTitle className="text-center my-auto">Up Coming Events</CardTitle>
-        <Table responsive bordered className="text-center my-auto">
-          <thead>
+      <Card className="mt-5 border-1">
+        <CardTitle className="text-center my-auto py-2 color">Up Coming Events</CardTitle>
+        <Table responsive  className="text-center my-auto">
+          <thead className="th-color">
             <tr>
               <th>#</th>
               <th>Event Name</th>
@@ -39,7 +39,7 @@ const MyEvents = props => {
                 <td>
                   <Button
                     size="sm"
-                    color="primary"
+                    color="info"
                     className="btn btn-primary"
                     onClick={props.ManageEventReq.bind(this, item._id)}
                   >

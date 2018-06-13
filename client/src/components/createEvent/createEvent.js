@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input,Card } from "reactstrap";
 import DateTimePicker from "react-datetime-picker";
 import fetch from "../../services/userServices";
 import Dropzone from "react-dropzone";
@@ -16,7 +16,7 @@ class CreateEvent extends Component {
     event_location: "",
     event_img: null,
     event_owners: this.props._id,
-    event_desc: '',
+    event_desc: "",
     uploadedFileCloudinaryUrl: undefined,
     spin: ""
   };
@@ -63,7 +63,7 @@ class CreateEvent extends Component {
       event_img: this.state.uploadedFileCloudinaryUrl
     };
     let x = await fetch.createNewEvent(this.props._id, eventData);
- 
+
     this.props.history.push("/dashboard/#update");
   };
 
@@ -77,11 +77,10 @@ class CreateEvent extends Component {
   };
 
   render() {
-
     return (
-      <div className="mt-5">
-        <h2>Create New Event:</h2>
-        <Form onSubmit={this.handleSubmit}>
+      <Card className="mt-5 rounded">
+        <h2 className="color rounded-top text-center py-2">Create New Event:</h2>
+        <Form className ="m-5" onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="fname">Event Name:</Label>
             <Input
@@ -123,13 +122,13 @@ class CreateEvent extends Component {
             </Label>
             <Dropzone
               className={
-                "h-auto border border-danger rounded d-inline-block bg-danger text-light position-relative " +
+                "h-auto border drop-z rounded d-inline-block position-relative " +
                 this.state.spin
               }
               style={{
                 maxWidth: "200px",
                 minHeight: "100px",
-                minWidth: "100px"
+                minWidth: "100px",
               }}
               multiple={false}
               accept="image/*"
@@ -154,7 +153,7 @@ class CreateEvent extends Component {
           </FormGroup>
           <Button>Submit</Button>
         </Form>
-      </div>
+      </Card>
     );
   }
 }

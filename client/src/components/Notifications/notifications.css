@@ -1,0 +1,20 @@
+
+.list-group-item{
+    border-left: 3px #c2a8f5 solid !important;
+    transition: background-color .75s ease,transform .75s ease;
+}
+.list-group-item:nth-child(odd){
+    border-left: 3px #6b32a9 solid !important;
+    transition: background-color .75s ease,transform .75s ease;
+}
+
+.list-group-item:hover{
+    background-color: #c2a8f5;
+    transform: scale(1.02);
+}
+
+.list-group-item:nth-child(odd):hover{
+    background-color:  #6b32a9;
+    color: #fff;
+    transform: scale(1.02);
+}

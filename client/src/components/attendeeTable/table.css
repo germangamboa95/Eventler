@@ -1,3 +1,19 @@
 td, th {
     vertical-align: middle!important;
 }
+.link{
+    color: #8048da!important;
+}
+
+.link-1{
+    color: #75668e!important;
+}
+
+
+.link:hover {
+    text-decoration: underline !important;
+}
+
+.link-1:hover {
+    text-decoration: underline !important;
+}

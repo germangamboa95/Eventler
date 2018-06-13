@@ -10,12 +10,22 @@
     margin-left: -30px;
     border-radius: 50%;
     border: 3px solid lightgray;
-    border-top-color: coral;
+    border-top-color: #6b32a9 ;
     animation: spinner 0.7s linear infinite;
   }
+  .spinner-1{
+    background-color: #fff !important;
+  }
+  .drop-z{
+    background-color: #c2a8f5;
+  }
 
+  .react-calendar {
+    position: relative;
+    z-index: 10;
+  }
   @keyframes spinner {
     to {
       transform: rotate(360deg);
-    }
+    } 
   }

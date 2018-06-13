@@ -18,22 +18,20 @@ const AttendeeTable = props => {
         <td>{item.first_name}</td>
         <td>{item.last_name}</td>
         <td>
-          <Button
-            outline
-            color="info"
+          <a
+            className="link"
             onClick={props.sendEmail.bind(this, item._id, props.list)}
           >
             {item.email}
-          </Button>
+          </a>
         </td>
         <td>
-          <Button
-            outline
-            color="info"
+          <a
+            className="link-1"
             onClick={props.sendText.bind(this, item._id, props.list)}
           >
             {item.cell}
-          </Button>
+          </a>
         </td>
         <td>
           <Button
@@ -60,9 +58,9 @@ const AttendeeTable = props => {
 
     return (
       <Card className="mt-3 text-center">
-        <CardTitle className="my-auto py-1">{props.title}</CardTitle>
+        <CardTitle className="my-auto py-2 color ">{props.title}</CardTitle>
         <Table responsive className="mb-0">
-          <thead>
+          <thead className="th-color">
             <tr>
               <th>#</th>
               <th>First Name</th>
@@ -80,14 +78,14 @@ const AttendeeTable = props => {
             <div>
               <Button
                 size="sm"
-                color="success"
+                ccolor="secondary"
                 className="mr-1"
                 onClick={props.sendEmail.bind(this, whichlistIdStr, props.list)}
               >
                 Email All
               </Button>
               <Button
-                color="success"
+                color="secondary"
                 size="sm"
                 onClick={props.sendText.bind(this, whichlistIdStr, props.list)}
               >

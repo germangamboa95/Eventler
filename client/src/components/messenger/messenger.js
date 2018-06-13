@@ -5,7 +5,9 @@ import {
   Form,
   FormGroup,
   Label,
-  Input
+  Input,
+  Card,
+  CardHeader
 } from "reactstrap";
 
 
@@ -23,8 +25,11 @@ const Messenger = props => {
     }
   };
   return (
-    <Form className="mt-5" onSubmit={(e) => props.dispatchMsg(e, props.match.params.user.split(','), props.match.params.type)}>
-      <h2 className="text-center">Send {props.match.params.type}</h2>
+    <Card className="mt-5">
+
+    <h2 className="text-center color py-2">Send {props.match.params.type}</h2>
+ 
+    <Form className="m-5" onSubmit={(e) => props.dispatchMsg(e, props.match.params.user.split(','), props.match.params.type)}>
       <h4>To: {nameGenerator()}</h4>
       <FormGroup row>
         <Label for="exampleSelect" sm={2}>
@@ -44,6 +49,7 @@ const Messenger = props => {
       </FormGroup>
       <Button>Submit</Button>
     </Form>
+    </Card>
   );
 };
 
