@@ -18,14 +18,16 @@ class EventManager extends Component {
     event_id: this.props.match.params.id,
     isToday: false,
     modal: false,
-    componentInModal: '<h1>hello</h1>'
+    componentInModal: '<h1>hello</h1>',
+    componentInModalProps: ""
   };
 
-  toggle = whichComp => {
+  toggle = (whichComp, props) => {
     const x = (typeof whichComp != 'object')? whichComp : () => '';
     this.setState({
       modal: !this.state.modal,
-      componentInModal: x
+      componentInModal: x,
+      componentInModalProps: props
     });
   };
 
@@ -99,7 +101,7 @@ class EventManager extends Component {
 
   render() {
     // Move to own file later!
-    console.log(this.props)
+
     const DataTables = () =>
       this.state.isToday ? (
         <div>
@@ -110,6 +112,7 @@ class EventManager extends Component {
             <div className="col-md-6">
               <EventOptions
                 renderComp={this.state.componentInModal}
+                renderCompProps={this.state.componentInModalProps}
                 modal={this.state.modal}
                 toggle={this.toggle}
                 {...this.state}

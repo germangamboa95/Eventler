@@ -14,12 +14,20 @@ class CreateEvent extends Component {
     event_name: "",
     event_date: new Date(),
     event_location: "",
-    event_img: null,
+    event_img: undefined,
     event_owners: this.props._id,
     event_desc: "",
     uploadedFileCloudinaryUrl: undefined,
     spin: ""
   };
+
+  async componentDidMount() {
+    if(this.props.event_id) {
+      const eventData = await fetch.loadEventData(this.props.event_id);
+      this.setState(eventData.data, () => console.log(this.state));
+    }
+
+  }
 
   onImageDrop(files) {
     this.setState({
@@ -62,9 +70,17 @@ class CreateEvent extends Component {
       event_owners: this.props._id,
       event_img: this.state.uploadedFileCloudinaryUrl
     };
-    let x = await fetch.createNewEvent(this.props._id, eventData);
+    if(this.state._id) {
+      console.log(eventData)
+       const x = await fetch.updateEventData(eventData ,this.state._id)
+       console.log(x);
+    } else {
+      let x = await fetch.createNewEvent(this.props._id, eventData);
+      this.props.history.push("/dashboard/#update");
+    }
+   
 
-    this.props.history.push("/dashboard/#update");
+    
   };
 
   onChangeForm = e => {
@@ -79,7 +95,7 @@ class CreateEvent extends Component {
   render() {
     return (
       <Card className="mt-5 rounded">
-        <h2 className="color rounded-top text-center py-2">Create New Event:</h2>
+        <h2 className="color rounded-top text-center py-2">{this.props.title}:</h2>
         <Form className ="m-5" onSubmit={this.handleSubmit}>
           <FormGroup>
             <Label for="fname">Event Name:</Label>
@@ -95,7 +111,7 @@ class CreateEvent extends Component {
             </Label>
             <DateTimePicker
               onChange={this.onChange}
-              value={this.state.event_date}
+              value={new Date(this.state.event_date)}
             />
           </FormGroup>
           <FormGroup>
@@ -134,7 +150,7 @@ class CreateEvent extends Component {
               accept="image/*"
               onDrop={this.onImageDrop.bind(this)}
             >
-              {!this.state.uploadedFileCloudinaryUrl ? (
+              {(!this.state.event_img && !this.state.uploadedFileCloudinaryUrl)? (
                 this.state.spin === "spinner-1" ? (
                   <div />
                 ) : (
@@ -145,7 +161,7 @@ class CreateEvent extends Component {
               ) : (
                 <img
                   className="img-fluid"
-                  src={this.state.uploadedFileCloudinaryUrl}
+                  src={this.state.event_img || this.state.uploadedFileCloudinaryUrl}
                   alt="Uploaded content."
                 />
               )}

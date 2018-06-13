@@ -71,6 +71,7 @@ class EventSignUp extends Component {
               {...this.state}
               inputChange={this.handleInputChange}
               handleSubmit={this.handleSubmit}
+              title="Sign Up"
             />
           </Row>
         ) : (

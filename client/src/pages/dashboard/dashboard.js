@@ -77,7 +77,7 @@ class Dashboard extends Component {
             <Route
               path={this.props.match.url + "/create"}
               render={routeProps => (
-                <CreateEvent {...routeProps} {...this.state} Toast={this.props.Toast}/>
+                <CreateEvent {...routeProps} {...this.state} Toast={this.props.Toast} title="Create New Event"/>
               )}
             />
             <Route
@@ -103,6 +103,7 @@ class Dashboard extends Component {
             {...this.state}
             inputChange={this.handleInputChange}
             handleSubmit={this.handleSubmit}
+            title="Finish Registering"
           />
         );
       }

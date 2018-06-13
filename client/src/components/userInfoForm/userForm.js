@@ -5,7 +5,7 @@ const userForm = props => {
   console.log(props, "l");
   return (
     <Form onSubmit={(e) => props.handleSubmit(e)} className="mt-4 card p-5 mx-auto">
-      <h2>Join The Event!</h2>
+      <h2>{props.title}</h2>
       <FormGroup>
         <Label for="fname">First Name:</Label>
         <Input

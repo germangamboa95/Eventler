@@ -42,5 +42,8 @@ export default {
     },
     deleteGuest: (user_id, event_id, currentTable) => {
         return Api().post('event/managed/events/delete/guest', {user_id, event_id, currentTable})
+    },
+    updateEventData: (data, id) => {
+        return Api().post('event/managed/event', {updates:data, event_id: id})
     }
 }

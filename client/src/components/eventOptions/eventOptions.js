@@ -14,28 +14,30 @@ import Messenger from "../messenger/";
 import EventInfoUpdate from '../../components/createEvent';
 
 const EventOptions = props => {
-    const whichContainer = (Comp)=> <Comp/>
-    console.log(props, 'options container')
+    const whichContainer = (Comp, props)=> <Comp {...props}/>
+    console.log(props)
   return (
     <Card className="mt-4">
-      <CardHeader className="text-center">
-        <CardTitle>Event Options</CardTitle>
+      <CardHeader className="text-center color">
+        <CardTitle className="my-auto">Event Options</CardTitle>
+        </CardHeader>
         <CardBody>
           <ListGroup>
-            <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate)} >Update Event Details</ListGroupItem>
+            <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate, {title:"Updated Info", event_id: props.event_id})} >Update Event Details</ListGroupItem>
             <ListGroupItem >Invite Blast Via Email</ListGroupItem>
             <ListGroupItem>Invite Blast Via Text</ListGroupItem>
             <ListGroupItem>Add Event Admin</ListGroupItem>
             <ListGroupItem>Remove Event Admin</ListGroupItem>
           </ListGroup>
         </CardBody>
-      </CardHeader>
+      
       <Modal
           isOpen={props.modal}
           toggle={props.toggle}
+          className="p-0"
         >
           <ModalBody>
-          {whichContainer(props.renderComp)}
+          {whichContainer(props.renderComp, props.renderCompProps)}
           </ModalBody>
         </Modal>
     </Card>
