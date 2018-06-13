@@ -79,7 +79,7 @@ class Navbars extends React.Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md" style={navStyle}>
-          <Link className="navbar-brand" to={(this.props.loggedIn)?'/dashboard':'/'}>Evently</Link>
+          <Link className="navbar-brand" to={(this.props.loggedIn)?'/dashboard':'/'}>Eventler</Link>
 
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>

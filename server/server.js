@@ -12,9 +12,9 @@ const passport = require("./scripts/passportConfig")
 
 //  Init express
 const app = express();
-
+  
 // Mongo connection
-const connectUrl = process.env.MONGODB_URI || "mongodb://localhost:27017/test";
+const connectUrl = process.env.MONGODB_URI;
 mongoose.connect(connectUrl);
 mongoose.Promise = Promise;
 

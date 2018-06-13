@@ -4,8 +4,8 @@ import { Card, Button, CardTitle, CardBody } from "reactstrap";
 const socialLogin = props => {
   return (
     <Card>
-      <CardBody className="text-center d-flex flex-column justify-content-around">
-        <CardTitle>{props.msg}</CardTitle>
+      <CardBody className="text-center d-flex flex-column justify-content-between">
+        <CardTitle style={{fontSize: "2rem"}}>{props.msg}</CardTitle>
         <Button
           href="http://localhost:3000/api/auth/facebook"
           className="m-1 d-flex justify-content-start w-100"

@@ -9,15 +9,27 @@
   font-size: 2rem;
 }
 
+.home-main-container {
+  background:linear-gradient(to right, #1f1c2c, #928dab);
+  color: #fff;
+  height: 100%;
+}
 .sign-u {
     color: #000;
+    opacity: .75;
 }
 
-.anti-hero {
-  height: 50vh;
-
+.quick-info {
+  width: 90%;
 }
-
 .p-copy{
     width: 80%;
+}
+
+.title-deco {
+  border-bottom: #fff 2px solid;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px #c3c3c338;
 }
