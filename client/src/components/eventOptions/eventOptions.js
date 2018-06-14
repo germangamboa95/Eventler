@@ -25,8 +25,8 @@ const EventOptions = props => {
         <CardBody>
           <ListGroup>
             <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate, {title:"Updated Info", event_id: props.event_id, toggle: props.toggle})} >Update Event Details</ListGroupItem>
-            <ListGroupItem onClick={props.toggle.bind(this, InviteBlaster, {title:"Email", event_id: props.event_id, event_name: props.event_name,toggle: props.toggle })}>Invite Blast Via Email</ListGroupItem>
-            <ListGroupItem>Invite Blast Via Text</ListGroupItem>
+            <ListGroupItem onClick={props.toggle.bind(this, InviteBlaster, {title:"Email",type:'email', event_id: props.event_id, event_name: props.event_name,toggle: props.toggle })}>Invite Blast Via Email</ListGroupItem>
+            <ListGroupItem onClick={props.toggle.bind(this, InviteBlaster, {title:"Text",type:'phone', event_id: props.event_id, event_name: props.event_name,toggle: props.toggle })}>Invite Blast Via Text</ListGroupItem>
             <ListGroupItem>Add Event Admin</ListGroupItem>
             <ListGroupItem>Remove Event Admin</ListGroupItem>
           </ListGroup>

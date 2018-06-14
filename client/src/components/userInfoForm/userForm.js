@@ -47,12 +47,12 @@ const userForm = props => {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="cell">Cell Number: XXX-XXX-XXXX</Label>
+        <Label for="cell">Cell Number:</Label>
         <Input
           onChange={props.inputChange}
           type="tel"
           name="cell"
-          pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
+          pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,3})|(\(?\d{2,3}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$"
           id="cell"
           placeholder={props.cell ? props.email : "Insert Cell Number..."}
           value={props.cell ? props.cell : ""}

@@ -55,5 +55,11 @@ export default {
   },
   updateEventData: (data, id) => {
     return Api().post("event/managed/event", { updates: data, event_id: id });
+  },
+  sendText: async data => {
+    return Api().post("coms/text/send", data);
+  },
+  sendTextInvite: async data => {
+    return Api().post("coms/text/send/invite", data);
   }
 };

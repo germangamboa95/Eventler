@@ -87,7 +87,8 @@ class EventManager extends Component {
       [event.target[0].name]: event.target[0].value,
       [event.target[1].name]: event.target[1].value
     };
-    const test = await fetch.sendManyEmail(dataToSend);
+    const serverResponse = (type === 'email')? await fetch.sendManyEmail(dataToSend): await fetch.sendText(dataToSend);
+    console.log(serverResponse);
     this.props.history.push(this.props.match.url);
   };
 
