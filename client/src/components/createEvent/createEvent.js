@@ -74,6 +74,7 @@ class CreateEvent extends Component {
       console.log(eventData)
        const x = await fetch.updateEventData(eventData ,this.state._id)
        console.log(x);
+       this.props.toggle()
     } else {
       let x = await fetch.createNewEvent(this.props._id, eventData);
       this.props.history.push("/dashboard/#update");
@@ -93,8 +94,9 @@ class CreateEvent extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
-      <Card className="mt-5 rounded">
+      <Card className="rounded">
         <h2 className="color rounded-top text-center py-2">{this.props.title}:</h2>
         <Form className ="m-5" onSubmit={this.handleSubmit}>
           <FormGroup>

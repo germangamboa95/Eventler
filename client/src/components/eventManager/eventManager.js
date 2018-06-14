@@ -22,13 +22,15 @@ class EventManager extends Component {
     componentInModalProps: ""
   };
 
-  toggle = (whichComp, props) => {
-    const x = (typeof whichComp != 'object')? whichComp : () => '';
-    this.setState({
-      modal: !this.state.modal,
-      componentInModal: x,
-      componentInModalProps: props
-    });
+  toggle = (whichComp, props ) => {
+      console.log(this)
+      const x = (typeof whichComp != 'object')? whichComp : () => '';
+      this.setState({
+        modal: !this.state.modal,
+        componentInModal: x,
+        componentInModalProps: props
+      });
+      this.loadEventData();
   };
 
   componentDidMount() {

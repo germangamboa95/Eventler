@@ -7,10 +7,11 @@ import {
   ListGroup,
   ListGroupItem,
   Modal,
-  ModalBody
+  ModalBody,
+  ModalHeader
 } from "reactstrap";
 
-import Messenger from "../messenger/";
+import InviteBlaster from '../inviteBlaster'
 import EventInfoUpdate from '../../components/createEvent';
 
 const EventOptions = props => {
@@ -18,13 +19,13 @@ const EventOptions = props => {
     console.log(props)
   return (
     <Card className="mt-4">
-      <CardHeader className="text-center color">
+      <CardHeader  className="text-center color">
         <CardTitle className="my-auto">Event Options</CardTitle>
         </CardHeader>
         <CardBody>
           <ListGroup>
-            <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate, {title:"Updated Info", event_id: props.event_id})} >Update Event Details</ListGroupItem>
-            <ListGroupItem >Invite Blast Via Email</ListGroupItem>
+            <ListGroupItem onClick={props.toggle.bind(this, EventInfoUpdate, {title:"Updated Info", event_id: props.event_id, toggle: props.toggle})} >Update Event Details</ListGroupItem>
+            <ListGroupItem onClick={props.toggle.bind(this, InviteBlaster, {title:"Email", event_id: props.event_id, event_name: props.event_name,toggle: props.toggle })}>Invite Blast Via Email</ListGroupItem>
             <ListGroupItem>Invite Blast Via Text</ListGroupItem>
             <ListGroupItem>Add Event Admin</ListGroupItem>
             <ListGroupItem>Remove Event Admin</ListGroupItem>
@@ -36,7 +37,8 @@ const EventOptions = props => {
           toggle={props.toggle}
           className="p-0"
         >
-          <ModalBody>
+         <ModalHeader className="py-0" toggle={props.toggle}/>
+          <ModalBody className="p-0">
           {whichContainer(props.renderComp, props.renderCompProps)}
           </ModalBody>
         </Modal>

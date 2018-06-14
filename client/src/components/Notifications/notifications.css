@@ -1,11 +1,12 @@
 
 .list-group-item{
     border-left: 3px #c2a8f5 solid !important;
-    transition: background-color .75s ease,transform .75s ease;
+    
+    transition: all .75s ease;
 }
 .list-group-item:nth-child(odd){
     border-left: 3px #6b32a9 solid !important;
-    transition: background-color .75s ease,transform .75s ease;
+    transition: all .75s ease;
 }
 
 .list-group-item:hover{
