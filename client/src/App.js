@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./containers/home";
-import Dashboard from "./containers/dashboard";
-import Navbar from "./containers/navbar";
+import Home from "./containers/home-container";
+import Dashboard from "./containers/dashboard-container";
+import Navbar from "./containers/nav-container";
 import NotFound from "./components/404";
 import ls from "./services/localStorage";
-import EventSignUp from "./containers/eventSignUp";
+import EventSignUp from "./containers/event-registration-container";
 
 class App extends Component {
   state = {
@@ -24,6 +24,7 @@ class App extends Component {
           <Navbar
             {...this.state}
             updateLoginState={this.updateLoginState}
+            updateUserData={this.updateUserData}
           />
        
           <Switch>

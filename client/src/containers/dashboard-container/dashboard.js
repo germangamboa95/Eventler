@@ -4,9 +4,9 @@ import fetch from "../../services/userServices";
 import UserForm from "../../components/form-user-info";
 import ls from "../../services/localStorage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CreateEvent from "../../components/createEvent";
+import CreateEvent from "../../containers/event-create-container";
 import DashboardContainer from "../../components/dashBoardContainer";
-import EventManager from "../../components/eventManager";
+import EventManager from "../../containers/event-manager-container";
 class Dashboard extends Component {
   state = {
     token: ls.useToken(),

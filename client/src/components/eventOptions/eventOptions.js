@@ -11,8 +11,8 @@ import {
   ModalHeader
 } from "reactstrap";
 
-import InviteBlaster from '../../containers/inviteBlaster';
-import EventInfoUpdate from '../../components/createEvent';
+import InviteBlaster from '../../containers/event-invite-blaster-container';
+import EventInfoUpdate from '../../containers/event-create-container';
 
 const EventOptions = props => {
     const whichContainer = (Comp, props)=> <Comp {...props}/>

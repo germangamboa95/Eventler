@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import fetch from "../../services/userServices";
-import EventInfo from "../EventInfoDisplay";
+import EventInfo from "../../components/EventInfoDisplay";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AttendeeTable from "../../components/attendeeTable";
 import Messenger from "../../components/messenger";
