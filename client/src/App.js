@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./pages/home";
-import Dashboard from "./pages/dashboard";
-import Navbar from "./components/navbar";
-import NotFound from "./pages/404";
+import Home from "./containers/home";
+import Dashboard from "./containers/dashboard";
+import Navbar from "./containers/navbar";
+import NotFound from "./components/404";
 import ls from "./services/localStorage";
-import EventSignUp from "./pages/eventSignUp";
+import EventSignUp from "./containers/eventSignUp";
+
 class App extends Component {
   state = {
     loggedIn: ls.useToken() ? true : false,
@@ -14,7 +15,6 @@ class App extends Component {
 
   //  Functions that allow app wide state update. Use carefully!
   updateUserData = obj => this.setState({ userData: obj });
-
   updateLoginState = state => this.setState({ loggedIn: state });
 
   render() {
@@ -24,11 +24,10 @@ class App extends Component {
           <Navbar
             {...this.state}
             updateLoginState={this.updateLoginState}
-            updateUserData={this.updateUserData}
           />
        
           <Switch>
-
+ 
             <Route
               path="/dashboard"
               render={routeProps => (

@@ -26,7 +26,6 @@ class CreateEvent extends Component {
       const eventData = await fetch.loadEventData(this.props.event_id);
       this.setState(eventData.data, () => console.log(this.state));
     }
-
   }
 
   onImageDrop(files) {

@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 
 const CheckInTable = props => {
+  
   if (props.whichList) {
     const whichlistIdStr = props.whichList.map(item => item._id).join(",");
     const awaitingApproval = props.whichList.map((item, i) => {

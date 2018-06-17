@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const userForm = props => {
-  console.log(props, "l");
   return (
     <Form onSubmit={(e) => props.handleSubmit(e)} className="mt-4 card p-5 mx-auto">
       <h2>{props.title}</h2>

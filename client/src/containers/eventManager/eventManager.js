@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import fetch from "../../services/userServices";
 import EventInfo from "../EventInfoDisplay";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import AttendeeTable from "../attendeeTable/attendeeTable";
-import Messenger from "../messenger/";
-import InviteLink from "../inviteLink";
+import AttendeeTable from "../../components/attendeeTable";
+import Messenger from "../../components/messenger";
+import InviteLink from "../../components/inviteLink";
 import moment from "moment";
-import CheckInTable from "../checkInTable";
+import CheckInTable from "../../components/checkInTable";
 import userServices from "../../services/userServices";
 import { Row } from "reactstrap";
-import EventOptions from "../eventOptions";
+import EventOptions from "../../components/eventOptions";
 
 
 // move this to a the pages folder!!

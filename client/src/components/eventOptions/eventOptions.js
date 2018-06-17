@@ -11,12 +11,11 @@ import {
   ModalHeader
 } from "reactstrap";
 
-import InviteBlaster from '../inviteBlaster'
+import InviteBlaster from '../../containers/inviteBlaster';
 import EventInfoUpdate from '../../components/createEvent';
 
 const EventOptions = props => {
     const whichContainer = (Comp, props)=> <Comp {...props}/>
-    console.log(props)
   return (
     <Card className="mt-4">
       <CardHeader  className="text-center color">

@@ -8,8 +8,8 @@ const Notifications = props => (
       <h4>Welcome back, {props.first_name}</h4>
       <h5 className="text-center">Notifications</h5>
       <ListGroup className="color-borders">
-        <ListGroupItem>Carlos Signed for for German's Party</ListGroupItem>
-        <ListGroupItem>Kevin Signed for for German's Party</ListGroupItem>
+        <ListGroupItem>Carlos Signed up for German's Party</ListGroupItem>
+        <ListGroupItem>Kevin Signed up for German's Party</ListGroupItem>
         <ListGroupItem>John accepted admin request for German's party</ListGroupItem>
         <ListGroupItem>German's Party is now full.</ListGroupItem>
       </ListGroup>
