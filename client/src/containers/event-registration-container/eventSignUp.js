@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row } from "reactstrap";
-import fetch from "../../services/userServices";
+import fetch from "../../services/serverApi";
 import SignUpForm from "../../components/form-user-info";
 import EventDisplay from "../../components/EventInfoDisplay";
 import ThankYou from "../../components/thankYou";

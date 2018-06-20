@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
-import fetch from "../../services/userServices";
+import fetch from "../../services/serverApi";
 import UserForm from "../../components/form-user-info";
 import ls from "../../services/localStorage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

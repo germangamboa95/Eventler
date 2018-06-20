@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input,Card } from "reactstrap";
 import DateTimePicker from "react-datetime-picker";
-import fetch from "../../services/userServices";
+import fetch from "../../services/serverApi";
 import Dropzone from "react-dropzone";
 import request from "superagent";
 import "./component.css";

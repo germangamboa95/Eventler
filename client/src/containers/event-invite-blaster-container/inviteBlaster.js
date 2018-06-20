@@ -9,7 +9,7 @@ import {
   Card,
   CardHeader
 } from "reactstrap";
-import fetch from "../../services/userServices";
+import fetch from "../../services/serverApi";
 
 class InviteBlaster extends Component {
   state = {

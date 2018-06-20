@@ -1,29 +1,19 @@
 import React from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavLink
-} from "reactstrap";
+import { Collapse, Navbar, NavbarToggler, Nav, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import ls from "../../services/localStorage";
 
 class Navbars extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    isOpen: false
+  };
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  }
+  };
 
   logOut = () => {
     ls.clear();
@@ -40,7 +30,7 @@ class Navbars extends React.Component {
             <Link className="nav-item nav-link" to="/dashboard">
               Dashboard
             </Link>
-            <Link className="nav-item nav-link" to='/dashboard/create'>
+            <Link className="nav-item nav-link" to="/dashboard/create">
               Create Event
             </Link>
             <NavLink className="nav-item nav-link" onClick={this.logOut}>
@@ -48,8 +38,7 @@ class Navbars extends React.Component {
             </NavLink>
           </Nav>
         );
-      } else if(this.props.location.pathname === '/joinEvent'){
-      
+      } else if (this.props.location.pathname === "/joinEvent") {
         return (
           <Nav className="ml-auto" navbar>
             <Link className="nav-item nav-link" to="/">
@@ -57,7 +46,7 @@ class Navbars extends React.Component {
             </Link>
 
             <a className="nav-item nav-link" href="http://germangamboa.com">
-            About Creator
+              About Creator
             </a>
           </Nav>
         );
@@ -69,7 +58,7 @@ class Navbars extends React.Component {
             </Link>
 
             <a className="nav-item nav-link" href="http://germangamboa.com">
-            About Creator
+              About Creator
             </a>
           </Nav>
         );
@@ -79,7 +68,12 @@ class Navbars extends React.Component {
     return (
       <div>
         <Navbar color="dark" dark expand="md" style={navStyle}>
-          <Link className="navbar-brand" to={(this.props.loggedIn)?'/dashboard':'/'}>Eventler</Link>
+          <Link
+            className="navbar-brand"
+            to={this.props.loggedIn ? "/dashboard" : "/"}
+          >
+            Eventler
+          </Link>
 
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -92,7 +86,7 @@ class Navbars extends React.Component {
 }
 
 const navStyle = {
-  background: 'linear-gradient(to left, #0f2027, #203a43, #2c5364)'
-}
+  background: "linear-gradient(to left, #0f2027, #203a43, #2c5364)"
+};
 
 export default withRouter(Navbars);
